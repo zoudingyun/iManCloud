@@ -1,0 +1,2 @@
+# IntranetMan
+基于Springboot的简易快速内网Jar项目管理工具
