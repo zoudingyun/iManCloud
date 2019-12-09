@@ -1,5 +1,10 @@
 package per.zdy.intranetman.web;
 
+
+import org.apache.commons.io.FileUtils;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -7,10 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import per.zdy.intranetman.domain.pojo.UserEntity;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 
 @Controller
 @ResponseBody
@@ -66,6 +68,78 @@ public class AdminController {
             }
         }
         return result;
+    }
+
+    private static String FILENAME = "";
+
+
+    @Value("${xdja.upload.file.path}")
+    private String decryptFilePath;
+
+    @Value("${xdja.upload.file.path.temp}")
+    private String decryptFilePathTemp;
+
+    @GetMapping("/webuploader")
+    public ModelAndView webuploader() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/model/webupload.html");
+        return mv;
+    }
+
+    /**
+     * 分片上传
+     *
+     * @return ResponseEntity<Void>
+     */
+    @PostMapping("/upload")
+    @ResponseBody
+    public ResponseEntity<Void> decrypt(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file, Integer chunks, Integer chunk, String name, String guid) throws IOException {
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        if (isMultipart) {
+            if (file == null) {
+                ;
+            }
+            System.out.println("guid:" + guid);
+            if (chunks == null && chunk == null) {
+                chunk = 0;
+            }
+            File outFile = new File(decryptFilePathTemp+File.separator+guid, chunk + ".part");
+            if ("".equals(FILENAME)) {
+                FILENAME = name;
+            }
+            InputStream inputStream = file.getInputStream();
+            FileUtils.copyInputStreamToFile(inputStream, outFile);
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 合并所有分片
+     *
+     * @throws Exception Exception
+     */
+    @GetMapping("/merge")
+    @ResponseBody
+    public void byteMergeAll(String guid) throws Exception {
+        System.out.println("merge:"+guid);
+        File file = new File(decryptFilePathTemp+File.separator+guid);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files != null && files.length > 0) {
+                File partFile = new File(decryptFilePath + File.separator + FILENAME);
+                for (int i = 0; i < files.length; i++) {
+                    File s = new File(decryptFilePathTemp+File.separator+guid, i + ".part");
+                    FileOutputStream destTempfos = new FileOutputStream(partFile, true);
+                    FileUtils.copyFile(s, destTempfos);
+                    destTempfos.close();
+                }
+                FileUtils.deleteDirectory(file);
+                FILENAME = "";
+            }
+
+        }
+
+
     }
 
 }
