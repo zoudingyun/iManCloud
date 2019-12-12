@@ -1,43 +1,56 @@
 package per.zdy.intranetman.domain.pojo;
 
-import java.util.Date;
+import per.zdy.intranetman.bean.Role;
+
+import java.util.Set;
 
 public class User {
 
-    private Integer id ;
-    private Integer age ;
-    private String name ;
-    private Date createDate ;
+    private String id;
+    private String userName;
+    private String password;
 
-    public Integer getId() {
+    /**
+     * 用户对应的角色集合
+     */
+    private Set<Role> roles;
+
+    public User(String id,String userName,String password,Set<Role> roles) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
