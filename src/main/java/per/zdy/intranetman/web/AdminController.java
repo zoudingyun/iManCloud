@@ -86,6 +86,21 @@ public class AdminController {
         return mv;
     }
 
+    @GetMapping("/")
+    public ModelAndView index() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/index.html");
+        return mv;
+    }
+
+
+    @GetMapping("/pages/layouts/grid.html")
+    public ModelAndView grid() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/pages/layouts/grid.html");
+        return mv;
+    }
+
     /**
      * 分片上传
      *
