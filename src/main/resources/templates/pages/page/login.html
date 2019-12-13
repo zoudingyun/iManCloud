@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,18 +12,17 @@
         <div class="login-box">            
             <div class="login-box-body">
             	<div class="login-logo">
-	                <a href="../../index.html"><b>Lanai</b>UI</a>
+	                <a href="../../index.html"><b>IntranetMan</b></a>
 	            </div>
 	            <hr>
-                <p class="login-box-msg">提示信息位置</p>
-
-                <form method="post">
+                <p style="color: #E7705B" th:text="${action}"></p>
+                <form th:action="@{/login}" method="post">
                     <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="邮箱/用户名/电话">
+                        <input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话">
                         <span class="fa fa-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="密码">
+                        <input type="password" name="password" class="form-control" placeholder="密码">
                         <span class="fa fa-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
