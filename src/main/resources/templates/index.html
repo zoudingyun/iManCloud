@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-    <title>Lanai-UI</title>
+    <title>IntranetMan</title>
     <link href="dist/css/lanai-ui.min.css" rel="stylesheet" />
 </head>
 
@@ -144,14 +144,14 @@
                                 <!-- The user image in the navbar-->
                                 <img src="dist/img/sl.jpg" class="user-image" alt="User Image" />
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">索隆</span>
+                                <span class="hidden-xs" shiro:user=""><shiro:principal /></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="dist/img/sl.jpg" class="img-circle" alt="User Image">
                                     <p>
-                                        索隆
+                                    <div shiro:user=""><shiro:principal /></div>
                                         <small>海贼猎人</small>
                                     </p>
                                 </li>
@@ -267,9 +267,6 @@
                                         <fieldset class="lanai-fieldset margin-t-15">
                                             <legend><i class="fa fa-info-circle"></i> 使用说明</legend>
                                             <div>
-<!--                                                <a href="javascript" shiro:user="" >欢迎 <shiro:principal /></>
-                                                <a href="javascript" shiro:hasPermission="admin:delete" >删除</a>a
-                                                <button href="javascript:;" shiro:hasRole="admin">编辑</button>-->
                                                 <p class="text-muted">样式引用</p>
                                                 <code> &lt;link href="css/lanai-ui.css" rel="stylesheet" /&gt;</code>
                                                 <p class="text-muted">脚本引用</p>
@@ -586,7 +583,7 @@
                 <div class="direct-chat-messages" id="listmsg">
                     <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left">索隆</span>
+                            <span class="direct-chat-name pull-left" shiro:user=""><shiro:principal /></span>
                             <span class="direct-chat-timestamp pull-right">18/02/05 6:00am</span>
                         </div>
                         <!-- /.direct-chat-info -->
@@ -661,7 +658,7 @@
             <div class="lockscreen-logo">
                 <a href="#"><b>Lanai</b>UI</a>
             </div>
-            <div class="lockscreen-name">索隆</div>
+            <div class="lockscreen-name" shiro:user=""><shiro:principal /></div>
             <div class="lockscreen-item">
                 <div class="lockscreen-image">
                     <img src="img/sl.jpg" />
@@ -1051,7 +1048,7 @@
                 <div class="direct-chat-messages" id="listmsg">
                     <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left">索隆</span>
+                            <span class="direct-chat-name pull-left"  shiro:user=""><shiro:principal /></span>
                             <span class="direct-chat-timestamp pull-right">18/02/05 6:00am</span>
                         </div>
                         <!-- /.direct-chat-info -->
@@ -1129,7 +1126,7 @@
             <div class="lockscreen-logo">
                 <a href="#"><b>Lanai</b>UI</a>
             </div>
-            <div class="lockscreen-name">索隆</div>
+            <div class="lockscreen-name" shiro:user=""><shiro:principal /></div>
             <div class="lockscreen-item">
                 <div class="lockscreen-image">
                     <img src="dist/img/sl.jpg" />

@@ -9,13 +9,15 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import per.zdy.intranetman.domain.pojo.User;
 
 @RestController
 public class LoginController {
 
     @RequestMapping("/login")
-    public String login(User user) {
+    public ModelAndView login(User user) {
+        ModelAndView mv = new ModelAndView();
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
@@ -28,13 +30,17 @@ public class LoginController {
 //            subject.checkRole("admin");
 //            subject.checkPermissions("query", "add");
         } catch (AuthenticationException e) {
-            e.printStackTrace();
-            return "账号或密码错误！";
+            mv.setViewName("/pages/page/login.html");
+            e.getMessage();
+            return mv;
+
         } catch (AuthorizationException e) {
-            e.printStackTrace();
-            return "没有权限";
+            e.getMessage();
+            mv.setViewName("/pages/page/500.html");
+            return mv;
         }
-        return "login success";
+        mv.setViewName("/index.html");
+        return mv;
     }
     //注解验角色和权限
     @RequiresRoles("admin")
