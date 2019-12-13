@@ -3,6 +3,34 @@ $(function () {
         {
             "addtab": "",
             "target": "",
+            "title": "后端管理",
+            "url": "",
+            "icon": "fa-microchip",
+            "nav": "layouts",
+            "children": [
+                {
+                    "addtab": "grid",
+                    "target": "#MasterTabs",
+                    "title": "后端发布",
+                    "url": "pages/layouts/grid.html",
+                    "icon": "",
+                    "nav": "layouts",
+                    "children":[]
+                },
+                {
+                    "addtab": "layout",
+                    "target": "#MasterTabs",
+                    "title": "后台布局",
+                    "url": "pages/layouts/layout.html",
+                    "icon": "",
+                    "nav": "layouts",
+                    "children":[]
+                }
+            ]
+        },
+        {
+            "addtab": "",
+            "target": "",
             "title": "布局",
             "url": "",
             "icon": "fa-columns",
