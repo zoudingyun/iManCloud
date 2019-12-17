@@ -9,10 +9,10 @@ $(function () {
             "nav": "layouts",
             "children": [
                 {
-                    "addtab": "grid",
+                    "addtab": "back-end-services",
                     "target": "#MasterTabs",
-                    "title": "后端发布",
-                    "url": "pages/layouts/grid.html",
+                    "title": "项目发布",
+                    "url": "pages/projectManager/back-end-services.html",
                     "icon": "",
                     "nav": "layouts",
                     "children":[]

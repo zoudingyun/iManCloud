@@ -31,3 +31,5 @@ build/
 .vscode/
 
 file/
+
+test\.mv\.db
