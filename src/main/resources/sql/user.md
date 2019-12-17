@@ -35,7 +35,7 @@ select
     and name = #name#
     @}
     
-createTable
+createTable1
 ===
     
     CREATE TABLE `user` (
@@ -45,3 +45,9 @@ createTable
           `create_date` datetime NULL DEFAULT NULL,
           PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    
+createTable
+===
+    
+    SELECT orgid as id,key as name FROM T_INFO_API_ORGKEY 
+    

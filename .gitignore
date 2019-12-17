@@ -33,3 +33,5 @@ build/
 file/
 
 *.db
+
+test\.mv\.db

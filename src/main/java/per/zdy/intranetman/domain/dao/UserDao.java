@@ -21,4 +21,9 @@ public interface UserDao extends BaseMapper<User> {
     // JDK 1.8 可不加@Param  但java编译的时候开启-parameters选项
     List<User> selectUserByName(@Param("name") String name);
     void getUserListPageQuery(PageQuery query);
+    List<User> createTable();
+    List<User> findByName();
+    List<User> getUserList();
+
+
 }
