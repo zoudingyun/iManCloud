@@ -10,7 +10,27 @@
     <link href="dist/css/lanai-ui.min.css" rel="stylesheet" />
     <link href="dist/layui/css/layui.css" rel="stylesheet" />
 </head>
+<style> 
+.actionIcon
+{
+width:10px;
+height:14px;
+color: #666666;
+transition:color 0.5s;
+-moz-transition:color 0.5s; /* Firefox 4 */
+-webkit-transition:color 0.5s; /* Safari and Chrome */
+-o-transition:color 0.5s; /* Opera */
+float: right;
+font-size: 16px;
+z-index: 2;
+margin: 0 auto;
+}
 
+.actionIcon:hover
+{
+	color: #59A5C9;
+}
+</style>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <!-- Main Header -->
@@ -733,19 +753,19 @@
 			    ,height: 'full'
 			    //,url: '/demo/table/user/' //数据接口
 			    ,skin:'line'
-			    ,data:[{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},]
+			    ,data:[{"fileName":"<div style='z-index:1;position:absolute;'>dsadadsa</div><i class='fa fa-share-alt actionIcon'></i>","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},]
 			    ,page: true //开启分页
 			    ,cols: [[ //表头
-			      {field: 'fileName', title: '文件名', width:'60%', sort: true,templet:''}/**/
+			      {field: 'fileName', title: '文件名', width:'60%', sort: true}
 			      ,{field: 'fileSize', title: '大小',width:'20%', sort: true}
 			      ,{field: 'changeTime', title: '修改日期', sort: true,width:'20%'}
 
 			    ]]
 			    ,done:function(res,curr,count){
 			    	$("tbody tr").hover(function(){console.log("dsadsa"+this.sectionRowIndex);
-			    		$(this).attr("title",$(this).text());
+			    		//$(this).attr("title",$(this).text());
 			    	},function(){
-			    		$(this).removeAttr("title");
+			    		//$(this).removeAttr("title");
 			    	})
 			    }
 			  });
