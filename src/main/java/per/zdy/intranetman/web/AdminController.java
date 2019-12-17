@@ -101,6 +101,13 @@ public class AdminController {
         return mv;
     }
 
+    @GetMapping("/pages/projectManager/back-end-services.html")
+    public ModelAndView backEndServices() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/pages/projectManager/back-end-services.html");
+        return mv;
+    }
+
     /**
      * 分片上传
      *
