@@ -1,0 +1,18 @@
+.actionIcon
+{
+    color: #666666;
+    transition:color 0.2s;
+    -moz-transition:color 0.2s; /* Firefox 4 */
+    -webkit-transition:color 0.2s; /* Safari and Chrome */
+    -o-transition:color 0.2s; /* Opera */
+    float: right;
+    font-size: 16px;
+    z-index: 2;
+    vertical-align: middle;
+    cursor:pointer;
+}
+
+.actionIcon:hover
+{
+    color: #59A5C9;
+}
