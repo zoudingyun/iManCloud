@@ -1,10 +1,13 @@
 package per.zdy.intranetman.domain.pojo;
 
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@Data
 public class Role {
 
     @Id //主键

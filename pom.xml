@@ -104,6 +104,14 @@
             <version>1.2.18.RELEASE</version>
         </dependency>
 
+        <!--代码简化工具-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
