@@ -2,6 +2,8 @@ package per.zdy.intranetman.web;
 
 
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
