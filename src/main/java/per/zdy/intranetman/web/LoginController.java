@@ -7,6 +7,7 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import per.zdy.intranetman.domain.pojo.User;
+import per.zdy.intranetman.service.LoginService;
 
 import javax.validation.Valid;
 
@@ -22,6 +24,9 @@ import static per.zdy.intranetman.share.PublicValue.loginMessageReloginCN;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    LoginService loginService;
 
     @PostMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
@@ -64,7 +69,18 @@ public class LoginController {
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/pages/page/login.html");
+        if (loginService.isNewService()){
+            mv.setViewName("/pages/page/goto.html");
+        }else {
+            mv.setViewName("/pages/page/login.html");
+        }
+        return mv;
+    }
+
+    @GetMapping("/start")
+    public ModelAndView start(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/pages/page/start.html");
         return mv;
     }
   /*  @RequestMapping("/login")

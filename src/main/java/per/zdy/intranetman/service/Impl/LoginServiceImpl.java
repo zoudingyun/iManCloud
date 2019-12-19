@@ -24,6 +24,15 @@ public class LoginServiceImpl implements LoginService {
         return getMapByName(getMapByName);
     }
 
+    @Override
+    public Boolean isNewService(){
+        if (userDao.queryUserCount()>0){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     /**
      * 模拟数据库查询
      * @param userName

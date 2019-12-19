@@ -40,3 +40,8 @@ queryUserInfoByUserName
            AND role_list.role_name = role_permissions .role_name 
            AND role_permissions .permissions_name = permissions .permissions_name 
            AND user_pojo.user_name = #userName#
+           
+queryUserCount
+===
+    
+    SELECT count(user_name) from user_pojo

@@ -50,6 +50,7 @@ public class ShiroConfig {
         //对所有用户认证
         map.put("/**", "authc");
         map.put("/login", "anon");
+        map.put("/start", "anon");
         // 静态资源放行
         map.put("*.js", "anon");
         map.put("*.css", "anon");
@@ -57,6 +58,7 @@ public class ShiroConfig {
         map.put("/dist/**", "anon");
         map.put("/script/**", "anon");
         map.put("/themes/**", "anon");
+
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login");
         //首页

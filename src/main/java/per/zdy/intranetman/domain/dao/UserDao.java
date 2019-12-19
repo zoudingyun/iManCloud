@@ -37,5 +37,8 @@ public interface UserDao extends BaseMapper<User> {
     /**通过用户名查询用户信息*/
     public List<UserInfo> queryUserInfoByUserName(@Param("userName") String userName);
 
+    /**查询用户个数*/
+    public int queryUserCount();
+
 
 }

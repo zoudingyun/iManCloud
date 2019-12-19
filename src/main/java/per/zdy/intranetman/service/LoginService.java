@@ -6,4 +6,6 @@ public interface LoginService {
 
     public User getUserByName(String userName);
 
+    public Boolean isNewService();
+
 }
