@@ -70,6 +70,7 @@ public class LoginController {
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView();
         if (loginService.isNewService()){
+            mv.addObject("url","/start");
             mv.setViewName("/pages/page/goto.html");
         }else {
             mv.setViewName("/pages/page/login.html");

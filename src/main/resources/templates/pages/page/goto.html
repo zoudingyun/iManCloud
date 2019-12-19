@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<script>
+<script th:inline="javascript">
 
-    window.location.href="/start";
+    window.location.href= [[${url}]];
 
 </script>
 </body>
