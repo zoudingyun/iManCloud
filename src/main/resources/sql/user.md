@@ -1,53 +1,42 @@
-sample
-===
-   * 注释
-
-    select #use("cols")# from user where #use("condition")#
-
-cols
-===
-
-    id,name,age,create_date
-
-updateSample
-===
-
-    `id`=#id#,`name`=#name#,`age`=#age#,`create_date`=#date#
-
-condition
-===
-
-    1 = 1
-    @if(!isEmpty(name)){
-     and `name`=#name#
-    @}
-    @if(!isEmpty(age)){
-     and `age`=#age#
-    @}
-    
-select
-===
-    select * from user where 1=1
-    @if(!isEmpty(age)){
-    and age = #age#
-    @}
-    @if(!isEmpty(name)){
-    and name = #name#
-    @}
-    
-createTable1
+queryAllPermission
 ===
     
-    CREATE TABLE `user` (
-          `id` int(11) NOT NULL AUTO_INCREMENT,
-          `name` varchar(64) DEFAULT NULL,
-          `age` int(4) DEFAULT NULL,
-          `create_date` datetime NULL DEFAULT NULL,
-          PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    SELECT * FROM PERMISSIONS 
     
-createTable
+queryRolesByUserName
 ===
     
-    SELECT orgid as id,key as name FROM T_INFO_API_ORGKEY 
+    SELECT r.id, 
+           r.role_name 
+    FROM   role_list r, 
+           user_role i 
+    WHERE  i.user_name = #userName# 
+           AND i.role_name = r.role_name  
+           
+queryPermissionsByRoleName
+=== 
     
+    SELECT p.id, 
+           p.permissions_name 
+    FROM   permissions p, 
+           role_permissions rp 
+    WHERE  rp.permissions_name = p.permissions_name 
+           AND rp.role_name =  #roleName#
+           
+queryUserInfoByUserName
+=== 
+    
+    SELECT user_pojo.user_name, 
+           user_pojo.password,
+           role_list.role_name, 
+           permissions.permissions_name 
+    FROM   user_pojo, 
+           user_role, 
+           role_list, 
+           role_permissions, 
+           permissions 
+    WHERE  user_pojo.user_name = user_role.user_name 
+           AND user_role.role_name = role_list.role_name 
+           AND role_list.role_name = role_permissions .role_name 
+           AND role_permissions .permissions_name = permissions .permissions_name 
+           AND user_pojo.user_name = #userName#

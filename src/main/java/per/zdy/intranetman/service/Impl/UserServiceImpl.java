@@ -15,11 +15,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userMapper;
 
     public User findByName(String name){
-        return  userMapper.selectUserByName(name).get(0);
+        return  null;
     }
 
     public List<User> getUserList(){
-        return userMapper.getUserList();
+        return null;
     }
 
 }

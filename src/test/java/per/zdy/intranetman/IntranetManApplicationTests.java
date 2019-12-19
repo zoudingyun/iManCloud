@@ -16,9 +16,6 @@ class IntranetManApplicationTests {
 
     @Test
     void contextLoads() {
-
-        List<User> users = userDao.createTable();
-        int a = 0;
     }
 
 }

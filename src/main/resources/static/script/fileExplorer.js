@@ -11,14 +11,19 @@ layui.use('table', function(){
         elem: '#fileExplorer'
         ,height: 'full'
         ,skin:'line'
-        ,data:[{"fileName":"<div style='z-index:1;position:absolute;'>dsadadsa</div><i onclick='f()' title='分享' class='fa fa-share-alt layui-table-cell actionIcon'></i>","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},]
+        ,data:[{"fileName":"<div style='z-index:1;position:absolute;'>dsadadsa</div><i onclick='f()' title='分享' class='fa fa-share-alt layui-table-cell actionIcon'></i>","fileSize":"dsadadsa","changeTime":"dsadadsa","path":"000"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa","path":"000"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa","path":"000"}]
         ,page: true //开启分页
+        ,text: {
+            none: '文件夹为空' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+        }
         ,cols: [ //表头
             [
-                {type:'checkbox', width:'5%',}
-                ,{field: 'fileName', title: '文件名', width:'55%', sort: true}
+                {type:'checkbox', width:'5%'}
+                ,{field: 'fileName', title: '文件名', width:'50%', sort: true}
                 ,{field: 'fileSize', title: '大小',width:'20%', sort: true}
-                ,{field: 'changeTime', title: '修改日期', sort: true,width:'20%'}
+                ,{field: 'changeTime', title: '修改日期', sort: true,width:'25%'}
+                ,{field: 'path', sort: true,hide:true}
+                ,{field: 'fileType', sort: true,hide:true}
             ]]
     });
     //监听表格复选框选择
@@ -65,7 +70,7 @@ layui.use('table', function(){
 
 function f() {
     table.reload('fileExplorer', {
-        data:[{"fileName":"<div style='z-index:1;position:absolute;'>11111111111</div><i title='分享' class='fa fa-share-alt layui-table-cell actionIcon'></i>","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},{"fileName":"dsadadsa","fileSize":"dsadadsa","changeTime":"dsadadsa"},]
+        data:[]
         //,height: 300
     });
 }

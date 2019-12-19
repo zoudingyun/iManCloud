@@ -55,7 +55,7 @@ We want to fix all the issues as soon as possible, but before fixing a bug we ne
 
 A minimal reproduce scenario using [CodePen](https://codepen.io/pen) allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem. If [CodePen](https://codepen.io/pen) is not a suitable way to demonstrate the problem (for example for issues related to our npm packaging), please create a standalone git repository demonstrating the problem.
 
-We will be insisting on a minimal reproduce scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience users often find coding problems themselves while preparing a minimal reproduce scenario. We understand that sometimes it might be hard to extract essentials bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
+We will be insisting on a minimal reproduce scenario in order to save maintainers time and ultimately be able to fix more bugs. Interestingly, from our experience user often find coding problems themselves while preparing a minimal reproduce scenario. We understand that sometimes it might be hard to extract essentials bits of code from a larger code-base but we really need to isolate the problem before we can fix it.
 
 Unfortunately we are not able to investigate / fix bugs without a minimal reproduce scenario, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
 

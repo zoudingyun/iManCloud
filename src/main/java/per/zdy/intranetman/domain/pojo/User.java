@@ -1,9 +1,11 @@
 package per.zdy.intranetman.domain.pojo;
 
+import lombok.Data;
 import per.zdy.intranetman.bean.Role;
 
 import java.util.Set;
 
+@Data
 public class User {
 
     private String id;
@@ -14,13 +16,6 @@ public class User {
      * 用户对应的角色集合
      */
     private Set<Role> roles;
-
-    public User(String id,String userName,String password,Set<Role> roles) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.roles = roles;
-    }
 
     public String getId() {
         return id;

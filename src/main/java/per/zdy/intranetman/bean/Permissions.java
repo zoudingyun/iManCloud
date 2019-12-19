@@ -1,14 +1,17 @@
 package per.zdy.intranetman.bean;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+@Data
 public class Permissions {
 
+    @Id //主键
     private String id;
     private String permissionsName;
-
-    public Permissions(String id,String permissionsName){
-        this.id = id;
-        this.permissionsName = permissionsName;
-    }
 
     public String getId() {
         return id;
@@ -25,4 +28,10 @@ public class Permissions {
     public void setPermissionsName(String permissionsName) {
         this.permissionsName = permissionsName;
     }
+
+/*public Permissions(String id,String permissionsName){
+        this.id = id;
+        this.permissionsName = permissionsName;
+    }*/
+
 }

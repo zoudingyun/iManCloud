@@ -1,18 +1,22 @@
 package per.zdy.intranetman.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import per.zdy.intranetman.bean.Permissions;
 import per.zdy.intranetman.bean.Role;
+import per.zdy.intranetman.domain.dao.UserDao;
+import per.zdy.intranetman.domain.pojo.RoleList;
 import per.zdy.intranetman.domain.pojo.User;
+import per.zdy.intranetman.domain.pojo.UserInfo;
 import per.zdy.intranetman.service.LoginService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class LoginServiceImpl implements LoginService {
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public User getUserByName(String getMapByName) {
@@ -26,28 +30,35 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     private User getMapByName(String userName){
-        //共添加两个用户，两个用户都是admin一个角色，
-        //wsl有query和add权限，zhangsan只有一个query权限
-        Permissions permissions1 = new Permissions("1","query");
-        Permissions permissions2 = new Permissions("2","add");
-        Set<Permissions> permissionsSet = new HashSet<>();
-        permissionsSet.add(permissions1);
-        permissionsSet.add(permissions2);
-        Role role = new Role("1","admin",permissionsSet);
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
-        User user = new User("1","wsl","123456",roleSet);
-        Map<String ,User> map = new HashMap<>();
-        map.put(user.getUserName(), user);
 
-        Permissions permissions3 = new Permissions("3","query");
-        Set<Permissions> permissionsSet1 = new HashSet<>();
-        permissionsSet1.add(permissions3);
-        Role role1 = new Role("2","user",permissionsSet1);
-        Set<Role> roleSet1 = new HashSet<>();
-        roleSet1.add(role1);
-        User user1 = new User("2","zhangsan","123456",roleSet1);
-        map.put(user1.getUserName(), user1);
-        return map.get(userName);
+        User user = new User();
+        List<UserInfo> userInfos = userDao.queryUserInfoByUserName(userName);
+        if (userInfos.size()<=0){
+            return null;
+        }
+        List<Role> roles = new ArrayList<>();
+        Set<Role> roleSet = new HashSet<>();
+        for (UserInfo userInfo:userInfos){
+            Role role = new Role();
+            role.setRoleName(userInfo.getRoleName());
+            roles.add(role);
+        }
+        for (int i =0;i<roles.size();i++){
+            Set<Permissions> permissionsSet = new HashSet<>();
+            for (UserInfo userInfo:userInfos){
+                if (roles.get(i).getRoleName().equals(userInfo.getRoleName())){
+                    Permissions permissions = new Permissions();
+                    permissions.setPermissionsName(userInfo.getPermissionsName());
+                    permissionsSet.add(permissions);
+                }
+            }
+            roles.get(i).setPermissions(permissionsSet);
+            roleSet.add(roles.get(i));
+        }
+
+        user.setPassword(userInfos.get(0).getPassword());
+        user.setRoles(roleSet);
+
+        return user;
     }
 }

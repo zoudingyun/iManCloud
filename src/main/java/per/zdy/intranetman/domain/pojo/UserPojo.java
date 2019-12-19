@@ -1,20 +1,19 @@
 package per.zdy.intranetman.domain.pojo;
-
-
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * 用户角色对应关系
+ * @author zdy
+ * */
 @Entity
 @Data
-public class Role {
+public class UserPojo {
 
     @Id //主键
-    private Integer id;
-    private Integer age;
-    private String name;
-    private String address;
-    private String city;
+    private String userName;
+    private String password;
 
 }

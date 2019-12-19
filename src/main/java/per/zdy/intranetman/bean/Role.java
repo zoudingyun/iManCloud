@@ -1,7 +1,11 @@
 package per.zdy.intranetman.bean;
 
+import lombok.Data;
+import per.zdy.intranetman.domain.pojo.RoleList;
+
 import java.util.Set;
 
+@Data
 public class Role {
 
     private String id;
@@ -11,10 +15,11 @@ public class Role {
      */
     private Set<Permissions> permissions;
 
-    public Role(String id,String roleName,Set<Permissions> permissions){
-        this.id = id;
-        this.roleName = roleName;
-        this.permissions = permissions;
+    public Role(RoleList roleList){
+        this.id = roleList.getId();
+        this.roleName = roleList.getRoleName();
+    }
+    public Role(){
     }
 
     public String getId() {
