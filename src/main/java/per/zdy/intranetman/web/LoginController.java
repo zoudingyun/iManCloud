@@ -62,7 +62,8 @@ public class LoginController {
             mv.setViewName("/pages/page/500.html");
             return mv;
         }
-        mv.setViewName("/index.html");
+        mv.addObject("url","/");
+        mv.setViewName("/pages/page/goto.html");
         return mv;
     }
 

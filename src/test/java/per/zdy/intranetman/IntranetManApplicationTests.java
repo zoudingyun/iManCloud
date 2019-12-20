@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import per.zdy.intranetman.domain.dao.UserDao;
 import per.zdy.intranetman.domain.pojo.User;
+import per.zdy.intranetman.service.FileService;
 
 import java.util.List;
 
@@ -12,10 +13,11 @@ import java.util.List;
 class IntranetManApplicationTests {
 
     @Autowired
-    UserDao userDao;
+    FileService fileService;
 
     @Test
     void contextLoads() {
+        fileService.queryChildPaths("C:/app");
     }
 
 }
