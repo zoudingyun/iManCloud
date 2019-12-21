@@ -1,64 +1,152 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-    <title></title>
+    <title>开始</title>
     <link href="../../dist/css/lanai-ui.min.css" rel="stylesheet" />
 </head>
-<body class="login-page">
-    <section class="content">
-        <div class="login-box">            
-            <div class="login-box-body">
-            	<div class="login-logo">
-	                <a href="../../index.html"><b>IntranetMan</b></a>
-	            </div>
-	            <hr>
-                <p style="color: #E7705B" th:text="${action}"></p>
-                <form th:action="@{/login}" method="post">
-                    <div class="form-group has-feedback">
-                        <input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话">
-                        <span class="fa fa-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" name="password" class="form-control" placeholder="密码">
-                        <span class="fa fa-lock form-control-feedback"></span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-8">
-                            <div class="checkbox checkbox-primary">
-		                        <input id="checkbox1" type="checkbox" checked="">
-		                        <label for="checkbox1">
-		                            	记住密码
-		                        </label>
-		                    </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-xs-12 col-sm-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-                <!--二维码暂时不需要-->
-                <!--<div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <div class="login-wechat-qr">
-                    	<img src="../../dist/img/cli_200px.png" class="img-responsive">
-                    </div>                    
-                </div>-->
-                <!-- /.social-auth-links -->
-
-                <a href="#">密码找回</a><br>
-                <a href="register.html" class="text-center">注册新用户</a>
-
-            </div>
-            <!-- /.login-box-body -->
+<body>
+<section class="content no-padding">
+    <div class="box box-widget">
+        <div class="box-header">
+            <h3 class="box-title"><blockquote class="layui-elem-quote">准备工作</blockquote></h3>
         </div>
+        <div class="box-body">
+            <div id="wizard" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                    <li>
+                        <a href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                        开始<br />
+                                        <small>配置基础信息</small>
+                                    </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                        高级设置<br />
+                                        <small>自定义系统详细参数</small>
+                                    </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                        完成<br />
+                                        <small>准备好开始了吗？</small>
+                                    </span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="step-1">
+                    <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="webName">
+                                站点名称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="webName" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminId">
+                                管理员账号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="adminId" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminName">
+                                昵称 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="adminName" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminPwd">
+                                密码 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="password" id="adminPwd" name="last-name" required="required" class="form-control col-md-7 col-xs-12" style="position: relative;">
+                                <i class="fa fa-eye" id="togglePassword" style="position: absolute;
+                                                                                top: 10px;
+                                                                                right: 20px;cursor:pointer; "></i>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                                    </label>
+                                    <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="gender" value="female"> Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>-->
+                    </form>
+                </div>
+                <div id="step-2">
+                    <h2 class="StepTitle">Step 2 Content</h2>
+                    <p>
+                        do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <div id="step-3">
+                    <h2 class="StepTitle">Step 3 Content</h2>
+                    <p>
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../../dist/js/jquery.min.js"></script>
+<script src="../../dist/plugins/smart-wizard/js/jquery.smartWizard_CN.js"></script>
+<script src="../../dist/js/lanai-ui.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#wizard').smartWizard();
 
-    </section>
-    <script src="../../dist/js/jquery.min.js"></script>
-    <script src="../../dist/js/lanai-ui.min.js"></script>
+        $('#wizard_verticle').smartWizard({
+            transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+    });
+    $("#togglePassword").click(function () {
+        var hClass= $("#togglePassword").hasClass("fa-eye");
+        if(hClass==true){
+            $("#togglePassword").removeClass("fa-eye");
+            $("#togglePassword").addClass("fa-eye-slash");
+            $("#adminPwd").attr("type", "text");
+        }else if(hClass==false){
+            $("#togglePassword").addClass("fa-eye");
+            $("#togglePassword").removeClass("fa-eye-slash");
+            $("#adminPwd").attr("type", "password");
+        }})
+</script>
 </body>
 </html>

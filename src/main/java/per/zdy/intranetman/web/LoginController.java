@@ -85,6 +85,13 @@ public class LoginController {
         mv.setViewName("/pages/page/start.html");
         return mv;
     }
+
+    @GetMapping("/register")
+    public ModelAndView register(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/pages/page/register.html");
+        return mv;
+    }
   /*  @RequestMapping("/login")
     public ModelAndView login(User user) {
         ModelAndView mv = new ModelAndView();
