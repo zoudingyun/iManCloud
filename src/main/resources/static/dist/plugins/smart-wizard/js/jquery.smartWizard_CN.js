@@ -109,6 +109,7 @@ function SmartWizard(target, options) {
         _prepareSteps($this);
         // Show the first slected step
         _loadContent($this, $this.curStepIdx);
+
     };
 
     var _prepareSteps = function($this) {
@@ -174,6 +175,7 @@ function SmartWizard(target, options) {
     };
 
     var _showStep = function($this, stepIdx) {
+        pageCheck($this,stepIdx);//自定义检查当前步骤的数据是否正确
         var selStep = $this.steps.eq(stepIdx);
         var curStep = $this.steps.eq($this.curStepIdx);
         if(stepIdx != $this.curStepIdx){
