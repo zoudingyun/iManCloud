@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <title>开始</title>
-    <link href="../../dist/css/lanai-ui.min.css" rel="stylesheet" />
+    <link href="dist/css/lanai-ui.min.css" rel="stylesheet" />
 </head>
 <body>
 <section class="content no-padding">
@@ -47,7 +47,7 @@
                 <div id="step-1">
                     <form class="form-horizontal form-label-left">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="webName">
+                            <label id="webNamelab" class="control-label col-md-3 col-sm-3 col-xs-12" for="webName">
                                 站点名称 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminId">
+                            <label  id="adminIdlab" class="control-label col-md-3 col-sm-3 col-xs-12" for="adminId">
                                 管理员账号 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminPwd">
+                            <label id="adminPwdlab"  class="control-label col-md-3 col-sm-3 col-xs-12" for="adminPwd">
                                 密码 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adminName">
+                            <label id="adminNamelab"  class="control-label col-md-3 col-sm-3 col-xs-12" for="adminName">
                                 昵称 <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -125,8 +125,19 @@
 </section>
 <script src="../../dist/js/jquery.min.js"></script>
 <script src="../../dist/plugins/smart-wizard/js/jquery.smartWizard_CN.js"></script>
-<script src="../../dist/js/lanai-ui.min.js"></script>
+<script src="dist/js/lanai-ui.min.js"></script>
+<script src="script/layer/layer.js"></script>
+<style type="text/css">
+.errorClass{
+    color: #B15151;
+    text-decoration:underline;
+}
+</style>
 <script type="text/javascript">
+    var adminName;
+    var adminId;
+    var adminPwd;
+    var webName;
     $(function () {
         $('#wizard').smartWizard();
 
@@ -150,7 +161,43 @@
         }})
 
     function pageCheck($this,stepnum){
-        alert(stepnum+$this);
+        if ($this.curStepIdx<stepnum){
+            var flag = false;
+            if (stepnum==1){
+                if ($("#webName").val().length<=0) {
+                    flag = true;
+                    layer.msg("站点名称不能为空！");
+                    $("#webNamelab").addClass('errorClass');
+                }else {
+                    $("#webNamelab").removeClass('errorClass');
+                }
+                if ($("#adminId").val().length<=0) {
+                    flag = true;
+                    layer.msg("管理员账号不能为空！");
+                    $("#adminIdlab").addClass('errorClass');
+                }else {
+                    $("#adminIdlab").removeClass('errorClass');
+                }
+                if ($("#adminPwd").val().length<=0) {
+                    flag = true;
+                    layer.msg("密码不能为空！");
+                    $("#adminPwdlab").addClass('errorClass');
+                }else {
+                    $("#adminPwdlab").removeClass('errorClass');
+                }
+                if ($("#adminName").val().length<=0) {
+                    flag = true;
+                    layer.msg("昵称不能为空！");
+                    $("#adminNamelab").addClass('errorClass');
+                }else {
+                    $("#adminNamelab").removeClass('errorClass');
+                }
+                if (flag){
+                    throw SyntaxError();
+                }
+            }
+        }
+
     }
 </script>
 </body>
