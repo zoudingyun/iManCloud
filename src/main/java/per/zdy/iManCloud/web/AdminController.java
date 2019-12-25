@@ -2,14 +2,18 @@ package per.zdy.iManCloud.web;
 
 
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import per.zdy.iManCloud.domain.pojo.User;
 import per.zdy.iManCloud.domain.pojo.UserEntity;
+import per.zdy.iManCloud.service.LoginService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -17,6 +21,9 @@ import java.io.*;
 @Controller
 @ResponseBody
 public class AdminController {
+
+    @Autowired
+    LoginService loginService;
 
     @GetMapping(value = "/test")
     public ModelAndView test(HttpServletRequest req) {
@@ -88,7 +95,10 @@ public class AdminController {
 
     @GetMapping("/")
     public ModelAndView index() {
+        User user = loginService.getUserByName(SecurityUtils.getSubject().getPrincipal().toString());
         ModelAndView mv = new ModelAndView();
+        mv.addObject("userName",user.getUserName());
+        mv.addObject("nickname",user.getNickname());
         mv.setViewName("/index.html");
         return mv;
     }

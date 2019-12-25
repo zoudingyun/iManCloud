@@ -15,5 +15,5 @@ public class UserPojo {
     @Id //主键
     private String userName;
     private String password;
-
+    private String nickname;
 }

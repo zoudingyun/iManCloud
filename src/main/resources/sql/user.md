@@ -27,6 +27,7 @@ queryUserInfoByUserName
 === 
     
     SELECT user_pojo.user_name, 
+           user_pojo.nickname,
            user_pojo.password,
            role_list.role_name, 
            permissions.permissions_name 

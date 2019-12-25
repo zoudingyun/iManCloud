@@ -11,6 +11,7 @@ public class User {
     private String id;
     private String userName;
     private String password;
+    private String nickname;
 
     /**
      * 用户对应的角色集合
@@ -47,5 +48,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

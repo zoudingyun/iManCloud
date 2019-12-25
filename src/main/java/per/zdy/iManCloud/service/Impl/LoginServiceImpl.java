@@ -64,6 +64,8 @@ public class LoginServiceImpl implements LoginService {
             roleSet.add(roles.get(i));
         }
 
+        user.setUserName(userName);
+        user.setNickname(userInfos.get(0).getNickname());
         user.setPassword(userInfos.get(0).getPassword());
         user.setRoles(roleSet);
 
