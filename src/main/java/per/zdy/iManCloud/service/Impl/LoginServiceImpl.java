@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import per.zdy.iManCloud.bean.Permissions;
 import per.zdy.iManCloud.bean.Role;
+import per.zdy.iManCloud.domain.dao.SystemDao;
 import per.zdy.iManCloud.domain.dao.UserDao;
+import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
 import per.zdy.iManCloud.domain.pojo.User;
 import per.zdy.iManCloud.domain.pojo.UserInfo;
 import per.zdy.iManCloud.service.LoginService;
@@ -17,10 +19,13 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    SystemDao systemDao;
+
     @Override
-    public User getUserByName(String getMapByName) {
+    public User getUserByName(String userName) {
         //模拟数据库查询，正常情况此处是从数据库或者缓存查询。
-        return getMapByName(getMapByName);
+        return getMapByName(userName);
     }
 
     @Override
@@ -30,6 +35,20 @@ public class LoginServiceImpl implements LoginService {
         }else {
             return true;
         }
+    }
+
+    public void systemConf(ServerConfInitialize serverConfInitialize){
+        systemDao.addUser(serverConfInitialize.getAdminId(),serverConfInitialize.getAdminPwd(),serverConfInitialize.getAdminName());
+        systemDao.addSystemConf("WEB-NAME",serverConfInitialize.getWebName());
+        systemDao.addSystemConf("FILE-PATH",serverConfInitialize.getFilePath());
+        systemDao.addRoleList("admin");
+        systemDao.addRoleList("user");
+        systemDao.addRole("admin",serverConfInitialize.getAdminId());
+        systemDao.addPermissions("standard");
+        systemDao.addPermissions("superAdmin");
+        systemDao.addRolePermissions("admin","standard");
+        systemDao.addRolePermissions("user","standard");
+        systemDao.addRolePermissions("admin","superAdmin");
     }
 
     /**

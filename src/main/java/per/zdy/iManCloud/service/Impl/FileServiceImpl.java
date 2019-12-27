@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 import per.zdy.iManCloud.service.FileService;
 
 import java.io.File;
+import java.nio.file.Paths;
 
-import static cn.hutool.core.io.FileUtil.ls;
-
+import static cn.hutool.core.io.FileUtil.*;
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -14,6 +14,10 @@ public class FileServiceImpl implements FileService {
         File[] a = ls(path);
         a[0].isDirectory();
         int aa = 0;
+    }
+
+    public boolean pathIsExist(String path){
+        return isDirectory(Paths.get(path),false);
     }
 
 }

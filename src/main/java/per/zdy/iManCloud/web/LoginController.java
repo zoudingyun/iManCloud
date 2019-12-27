@@ -1,5 +1,6 @@
 package per.zdy.iManCloud.web;
 
+import cn.hutool.log.LogFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -12,21 +13,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
 import per.zdy.iManCloud.domain.pojo.User;
+import per.zdy.iManCloud.service.FileService;
 import per.zdy.iManCloud.service.LoginService;
 
 import javax.validation.Valid;
 
-import static per.zdy.iManCloud.share.PublicValue.loginMessageFailedCN;
-import static per.zdy.iManCloud.share.PublicValue.loginMessageReloginCN;
+import static per.zdy.iManCloud.share.PublicValue.*;
 
 @Controller
 public class LoginController {
 
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    FileService fileService;
 
     @PostMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
@@ -83,6 +89,25 @@ public class LoginController {
     public ModelAndView start(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/pages/page/start.html");
+        return mv;
+    }
+    @RequestMapping("/start")
+    public ModelAndView start(ModelAndView modelAndView, @RequestBody ServerConfInitialize serverConfInitialize, BindingResult bindingResult){
+        ModelAndView mv = new ModelAndView();
+        if (serverConfInitialize.checkNull()){
+            if (fileService.pathIsExist(serverConfInitialize.getFilePath())){
+                try{
+                    loginService.systemConf(serverConfInitialize);
+                    mv.addObject("url","/login");
+                    mv.setViewName("/pages/page/goto.html");
+                }catch (Exception ex){
+                    LogFactory.get().error(ex);
+                    mv.addObject("action",InitializeFailedCN+ex.getMessage());
+                }
+            }else {
+                mv.addObject("action",InitializeFailedNullCN);
+            }
+        }
         return mv;
     }
 

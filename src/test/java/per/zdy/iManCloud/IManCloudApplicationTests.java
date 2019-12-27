@@ -13,6 +13,8 @@ class IManCloudApplicationTests {
 
     @Test
     void contextLoads() {
+        Boolean v = fileService.pathIsExist("D:\\英雄时刻");
+
         fileService.queryChildPaths("C:/app");
     }
 
