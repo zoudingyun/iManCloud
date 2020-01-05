@@ -20,8 +20,8 @@ layui.use('table', function(){
             [
                 {type:'checkbox', width:'5%'}
                 ,{field: 'fileName', title: '文件名', width:'50%', sort: true}
-                ,{field: 'fileSize', title: '大小',width:'20%', sort: true}
-                ,{field: 'changeTime', title: '修改日期', sort: true }
+                ,{field: 'fileSize', title: '大小',width:'18%', sort: true}
+                ,{field: 'changeTime', title: '修改日期',width:'22%', sort: true  }
                 ,{field: 'path', sort: true,hide:true}
                 ,{field: 'fileType', sort: true,hide:true}
             ]]
