@@ -66,14 +66,16 @@ layui.use('table', function(){
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
+
+    f("/");
 });
 
-function f() {
+function f(path) {
     $.ajax( {
             type: "POST",
             contentType: "application/json",
             url:"/fileExplorerController/queryUserPath",
-            data: JSON.stringify(getQueryCondition()),
+            data: JSON.stringify(getQueryCondition(path)),
             success:function(response) {
                if (response.code == 200){
                     var dat = response.data;
@@ -81,7 +83,13 @@ function f() {
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
                         var file = dat[i].filePath.split('/');
-                        params.fileName = file[file.length-1];
+                        var fileName = file[file.length-1];
+                        if (dat[i].fileType.indexOf('folder')==0){
+                            fileName = "<div><i class='fa fa-folder'></i> "+fileName+"</div>";
+                        }else if (dat[i].fileType.indexOf('mov')==0) {
+                            fileName = "<div><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
+                        }
+                        params.fileName = fileName;
                         params.fileSize = "100K";
                         params.changeTime = "2019-12-12";
                         params.path = dat[i].filePath;
@@ -108,8 +116,8 @@ function f() {
 }
 
 //查询参数封装
-function getQueryCondition() {
+function getQueryCondition(path) {
     var params={'filePath':''};
-    params.filePath = "/test/";
+    params.filePath = path;
     return params;
 }
