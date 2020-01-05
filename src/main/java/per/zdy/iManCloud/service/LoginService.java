@@ -5,6 +5,10 @@ import per.zdy.iManCloud.domain.pojo.User;
 
 public interface LoginService {
 
+    /**
+     * 查询用户信息
+     * @param userName:用户账号
+     * */
     public User getUserByName(String userName);
 
     /**
@@ -13,8 +17,15 @@ public interface LoginService {
      * */
     public Boolean isNewService();
 
+    /**
+     * 插入系统基础配置参数
+     * @param serverConfInitialize:需要上传的系统配置
+     * */
     public void systemConf(ServerConfInitialize serverConfInitialize);
 
+    /**
+     * 刷新系统基础配置缓存
+     * */
     public void renovateSystemConf();
 
 }

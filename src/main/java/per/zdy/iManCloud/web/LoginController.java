@@ -100,6 +100,7 @@ public class LoginController {
                     loginService.systemConf(serverConfInitialize);
                     mv.addObject("url","/login");
                     mv.setViewName("/pages/page/goto.html");
+                    loginService.renovateSystemConf();
                 }catch (Exception ex){
                     LogFactory.get().error(ex);
                     mv.addObject("action",InitializeFailedCN+ex.getMessage());
