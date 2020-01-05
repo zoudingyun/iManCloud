@@ -80,6 +80,18 @@ function f(path) {
                if (response.code == 200){
                     var dat = response.data;
                     var data =new Array();
+                    if (path!="/"){
+                        var upPath="/";
+                        var p = path.split("/");
+                        if (p.length>1){
+                            for (var i=0;i<p.length-1;i++){
+                                upPath+=p[i];
+                            }
+                        }
+                        var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
+                        params.fileName = "<div class='fileName' onclick='f(\""+upPath+"\")'><i class='fa fa-mail-reply'></i> ...</div>";
+                        data.push(params);
+                    }
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
                         var file = dat[i].filePath.split('/');
