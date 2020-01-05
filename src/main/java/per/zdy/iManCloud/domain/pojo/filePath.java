@@ -11,10 +11,10 @@ import javax.persistence.Id;
  * */
 @Entity
 @Data
-public class filePath {
+public class FilePath {
     @Id
     String filePath;
-    String userId;
+    String userName;
     String fileType;
 
     public String getFilePath() {
@@ -25,12 +25,12 @@ public class filePath {
         this.filePath = filePath;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFileType() {
