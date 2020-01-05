@@ -75,8 +75,27 @@ function f() {
             url:"/fileExplorerController/queryUserPath",
             data: JSON.stringify(getQueryCondition()),
             success:function(response) {
-               var i = 0;
-                //alert($("#selectCompany").options[index].value);
+               if (response.code == 200){
+                    var dat = response.data;
+                    var data =new Array();
+                    for (var i = 0;i<dat.length;i++){
+                        var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
+                        var file = dat[i].filePath.split('/');
+                        params.fileName = file[file.length-1];
+                        params.fileSize = "100K";
+                        params.changeTime = "2019-12-12";
+                        params.path = dat[i].filePath;
+                        params.fileType = dat[i].fileType;
+                        data.push(params);
+                    }
+
+                   table.reload('fileExplorer', {
+                       data:data
+                        //,height: 300
+                    });
+               } else {
+                   console(response)
+               }
             },
             dataSrc:function(data)
             {
@@ -85,10 +104,7 @@ function f() {
         }
     );
 
-    table.reload('fileExplorer', {
-        data:[]
-        //,height: 300
-    });
+
 }
 
 //查询参数封装
