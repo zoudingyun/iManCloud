@@ -7,4 +7,14 @@ public class PublicValue {
     public static String InitializeFailedNullCN = "配置参数不能为空！";
     public static String InitializeFailedCN = "初始化失败！";
 
+    //系统公用参数
+    /**是否为新安装服务器*/
+    public static Boolean NEW_SYSTEM = null;
+
+    /**网站名称*/
+    public static String WEB_NAME = "IManCloud";
+
+    /**网盘文件系统路径*/
+    public static String FILE_PATH = "./file";
+
 }

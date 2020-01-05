@@ -13,6 +13,8 @@ import per.zdy.iManCloud.service.LoginService;
 
 import java.util.*;
 
+import static per.zdy.iManCloud.share.PublicValue.NEW_SYSTEM;
+
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -30,11 +32,18 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean isNewService(){
-        if (userDao.queryUserCount()>0){
-            return false;
-        }else {
-            return true;
+        if (null==NEW_SYSTEM){
+            if (userDao.queryUserCount()>0){
+                NEW_SYSTEM = false;
+                return false;
+            }else {
+                NEW_SYSTEM = true;
+                return true;
+            }
+        }else{
+            return NEW_SYSTEM;
         }
+
     }
 
     public void systemConf(ServerConfInitialize serverConfInitialize){
