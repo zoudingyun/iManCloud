@@ -16,6 +16,6 @@ import java.util.List;
 @Repository
 public interface FileDao {
 
-    public List<FilePath> queryUserFilePath(@Param("userName") String userName,@Param("parentPath") String parentPath);
+    public List<FilePath> queryUserFilePath(@Param("userName") String userName,@Param("parentPathSearch") String parentPathSearch,@Param("parentPath") String parentPath,@Param("parentPath1") String parentPath1);
 
 }

@@ -37,7 +37,7 @@ class IManCloudApplicationTests {
 
     @Test
     void testQueryPath(){
-        List<FilePath> o = fileDao.queryUserFilePath("admin","%");
+        //List<FilePath> o = fileDao.queryUserFilePath("admin","%");
         return;
     }
 

@@ -85,9 +85,11 @@ function f(path) {
                         var file = dat[i].filePath.split('/');
                         var fileName = file[file.length-1];
                         if (dat[i].fileType.indexOf('folder')==0){
-                            fileName = "<div><i class='fa fa-folder'></i> "+fileName+"</div>";
+                            fileName = "<div class='fileName' onclick='f(\""+dat[i].filePath+"\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
                         }else if (dat[i].fileType.indexOf('mov')==0) {
-                            fileName = "<div><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
+                            fileName = "<div class='fileName' onclick='alert(\'下载\')'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
+                        }else {
+                            fileName = "<div class='fileName'><i class='fa  fa-file-o'></i> "+fileName+"</div>";
                         }
                         params.fileName = fileName;
                         params.fileSize = "100K";
@@ -111,8 +113,6 @@ function f(path) {
             }
         }
     );
-
-
 }
 
 //查询参数封装
