@@ -1,4 +1,4 @@
-package per.zdy.iManCloud.conf;
+package per.zdy.iManCloud.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -20,7 +20,7 @@ public class ServerConfig implements ApplicationRunner {
     SystemDao systemDao;
 
     /**网盘文件存放主目录*/
-    public static String filePath = "";
+    public static String filePath = "./file";
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

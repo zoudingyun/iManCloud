@@ -28,3 +28,15 @@ addSystemConf
 ===
     
     INSERT INTO System_Config (conf_Name,conf_Value) VALUES (#confName#,#confValue#)
+    
+querySystemConf
+===
+
+    SELECT * 
+    FROM   (SELECT conf_value AS filePath 
+            FROM   system_config 
+            WHERE  conf_name = 'FILE-PATH'), 
+           (SELECT conf_value AS webName 
+            FROM   system_config 
+            WHERE  conf_name = 'WEB-NAME')  
+            

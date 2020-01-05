@@ -4,7 +4,6 @@ import org.beetl.sql.core.annotatoin.Param;
 import org.beetl.sql.core.annotatoin.SqlResource;
 import org.springframework.stereotype.Repository;
 import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
-
 /**
  * @author zdy
  * 系统参数配置
@@ -30,4 +29,7 @@ public interface SystemDao {
 
     /**配置权限列表*/
     public void addPermissions(@Param("permissionsName") String permissionsName);
+
+    /**查询系统配置参数*/
+    public ServerConfInitialize querySystemConf();
 }

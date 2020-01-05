@@ -1,10 +1,24 @@
 package per.zdy.iManCloud.domain.pojo;
 
+/**
+ * 系统基本配置参数
+ * @author zdy
+ * */
 public class ServerConfInitialize {
+
+    /**站点名称*/
     private String webName;
+
+    /**管理员账号*/
     private String adminId;
+
+    /**管理员密码*/
     private String adminPwd;
+
+    /**管理员昵称*/
     private String adminName;
+
+    /**网盘存储路径*/
     private String filePath;
 
     public String getWebName() {
