@@ -69,8 +69,31 @@ layui.use('table', function(){
 });
 
 function f() {
+    $.ajax( {
+            type: "POST",
+            contentType: "application/json",
+            url:"/fileExplorerController/queryUserPath",
+            data: JSON.stringify(getQueryCondition()),
+            success:function(response) {
+               var i = 0;
+                //alert($("#selectCompany").options[index].value);
+            },
+            dataSrc:function(data)
+            {
+                return data.data;
+            }
+        }
+    );
+
     table.reload('fileExplorer', {
         data:[]
         //,height: 300
     });
+}
+
+//查询参数封装
+function getQueryCondition() {
+    var params={'filePath':''};
+    params.filePath = "/test/";
+    return params;
 }
