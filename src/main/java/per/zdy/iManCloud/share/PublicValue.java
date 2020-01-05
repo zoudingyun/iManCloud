@@ -1,5 +1,7 @@
 package per.zdy.iManCloud.share;
 
+import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
+
 public class PublicValue {
 
     public static String loginMessageReloginCN = "登录信息过期，请重新登录！";
@@ -16,5 +18,14 @@ public class PublicValue {
 
     /**网盘文件系统路径*/
     public static String FILE_PATH = "./file";
+
+    /**
+     * 刷新系统配置缓存
+     * @param serverConfInitialize:需要更新的参数
+     * */
+    public static void renovateSystemConfig(ServerConfInitialize serverConfInitialize){
+        WEB_NAME = serverConfInitialize.getWebName();
+        FILE_PATH = serverConfInitialize.getFilePath();
+    }
 
 }

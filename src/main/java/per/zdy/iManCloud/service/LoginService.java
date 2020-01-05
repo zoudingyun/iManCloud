@@ -15,4 +15,6 @@ public interface LoginService {
 
     public void systemConf(ServerConfInitialize serverConfInitialize);
 
+    public void renovateSystemConf();
+
 }

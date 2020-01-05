@@ -14,6 +14,7 @@ import per.zdy.iManCloud.service.LoginService;
 import java.util.*;
 
 import static per.zdy.iManCloud.share.PublicValue.NEW_SYSTEM;
+import static per.zdy.iManCloud.share.PublicValue.renovateSystemConfig;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -60,8 +61,12 @@ public class LoginServiceImpl implements LoginService {
         systemDao.addRolePermissions("admin","superAdmin");
     }
 
+    public void renovateSystemConf(){
+        renovateSystemConfig(systemDao.querySystemConf());
+    }
+
     /**
-     * 模拟数据库查询
+     * 数据库查询
      * @param userName
      * @return
      */
