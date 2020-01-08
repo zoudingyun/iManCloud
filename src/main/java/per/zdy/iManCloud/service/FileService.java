@@ -17,4 +17,16 @@ public interface FileService {
      * */
     public List<FilePath> queryUserFilePathFromDbRecord(String userName,String parentPath);
 
+    /**
+     * 检查用户目录下指定路径的文件路径列表
+     *
+     * */
+    public List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath);
+
+    /**
+     * 检查用户目录下指定文件路径列表
+     * @param userName:用户名
+     * */
+    public List<FilePath> queryUserFilePathFromFileSystem(String userName);
+
 }

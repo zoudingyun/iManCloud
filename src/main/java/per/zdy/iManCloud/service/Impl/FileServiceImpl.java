@@ -1,5 +1,6 @@
 package per.zdy.iManCloud.service.Impl;
 
+import cn.hutool.core.io.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import per.zdy.iManCloud.domain.dao.FileDao;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cn.hutool.core.io.FileUtil.*;
+import static per.zdy.iManCloud.share.PublicValue.*;
+
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -50,6 +53,36 @@ public class FileServiceImpl implements FileService {
             filePaths.remove(integer);
         }
         return filePaths;
+    }
+
+    public List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath){
+        return null;
+    }
+
+    public List<FilePath> queryUserFilePathFromFileSystem(String userName){
+        String userPath = FILE_PATH+"/"+userName;
+        if (!pathIsExist(userPath)){
+            FileUtil.mkdir(userPath);
+        }
+        return getPath(userPath,userName);
+    }
+
+    List<FilePath> getPath(String path,String username){
+        File[] files = ls(path);
+        List<FilePath> filePathList = new ArrayList<>();
+        for (File file:files){
+            FilePath f=new FilePath();
+            f.setFilePath(file.getPath());
+            f.setUserName(username);
+            if (file.isDirectory()){
+                f.setFileType(FILE_TYPE_FOLDER);
+                filePathList.addAll(getPath(f.getFilePath(),username));
+            }else {
+                f.setFileType(FILE_TYPE_FILE);
+            }
+            filePathList.add(f);
+        }
+        return filePathList;
     }
 
 }

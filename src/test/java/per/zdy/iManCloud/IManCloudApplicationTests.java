@@ -8,6 +8,7 @@ import per.zdy.iManCloud.domain.dao.SystemDao;
 import per.zdy.iManCloud.domain.pojo.FilePath;
 import per.zdy.iManCloud.service.FileService;
 
+import java.io.File;
 import java.util.List;
 
 @SpringBootTest
@@ -38,6 +39,13 @@ class IManCloudApplicationTests {
     @Test
     void testQueryPath(){
         //List<FilePath> o = fileDao.queryUserFilePath("admin","%");
+        return;
+    }
+
+    @Test
+    void testFileSystem(){
+
+        List<FilePath> filePathList = fileService.queryUserFilePathFromFileSystem("admin");
         return;
     }
 

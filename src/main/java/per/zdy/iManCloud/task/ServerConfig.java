@@ -19,8 +19,6 @@ public class ServerConfig implements ApplicationRunner {
     @Autowired
     SystemDao systemDao;
 
-    /**网盘文件存放主目录*/
-    public static String filePath = "./file";
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

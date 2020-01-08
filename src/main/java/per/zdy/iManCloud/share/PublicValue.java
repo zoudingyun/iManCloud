@@ -19,6 +19,12 @@ public class PublicValue {
     /**网盘文件系统路径*/
     public static String FILE_PATH = "./file";
 
+    /**文件类型标识-文件夹*/
+    public static String FILE_TYPE_FOLDER = "folder";
+
+    /**文件类型标识-文件*/
+    public static String FILE_TYPE_FILE = "file";
+
     /**
      * 刷新系统配置缓存
      * @param serverConfInitialize:需要更新的参数
