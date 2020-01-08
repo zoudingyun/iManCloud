@@ -18,6 +18,24 @@ public class FilePath {
     String fileType;
     String parentPath;
     String fileName;
+    String fileRelativePath;
+    String parentFileRelativePath;
+
+    public String getParentFileRelativePath() {
+        return parentFileRelativePath;
+    }
+
+    public void setParentFileRelativePath(String parentFileRelativePath) {
+        this.parentFileRelativePath = parentFileRelativePath;
+    }
+
+    public String getFileRelativePath() {
+        return fileRelativePath;
+    }
+
+    public void setFileRelativePath(String fileRelativePath) {
+        this.fileRelativePath = fileRelativePath;
+    }
 
     public String getFileName() {
         return fileName;

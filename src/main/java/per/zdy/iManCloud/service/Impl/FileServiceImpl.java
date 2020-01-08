@@ -33,24 +33,11 @@ public class FileServiceImpl implements FileService {
 
     public List<FilePath> queryUserFilePathFromDbRecord(String userName, String parentPath){
         if (null == parentPath){
-            parentPath = FileUtil.getAbsolutePath(FILE_PATH)+"/"+userName+"/";
-        }
-        if (parentPath.equals("/")){
-            parentPath=FileUtil.getAbsolutePath(FILE_PATH)+"/"+userName+"/";
-        }
-        if(!FileUtil.isAbsolutePath(parentPath)){
-            parentPath = FileUtil.getAbsolutePath(parentPath);
+            parentPath = FILE_PATH+"/"+userName+"/";
         }
         parentPath = parentPath.replace('\\','/');
-        List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath+"%",parentPath,parentPath+"/");
+        List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath);
         List<FilePath> reList = new ArrayList<>();
-        for (int i= 0;i<filePaths.size();i++){
-            String filePath = filePaths.get(i).getFilePath();
-            filePath = filePath.substring(parentPath.length());
-        }
-        for (FilePath integer:reList){
-            filePaths.remove(integer);
-        }
         return filePaths;
     }
 
@@ -82,6 +69,14 @@ public class FileServiceImpl implements FileService {
             f.setUserName(username);
             f.setParentPath(file.getParent().replace('\\','/')+"/");
             f.setFileName(file.getName());
+            String xdPath = FileUtil.getAbsolutePath(FILE_PATH+"/"+username);
+            f.setFileRelativePath(f.getFilePath().replaceAll(xdPath,"."));
+            String [] fp = f.getFileRelativePath().split("/");
+            String parentFileRelativePath = "";
+            for(int i=0;i<fp.length-1;i++){
+                parentFileRelativePath+=fp[i]+"/";
+            }
+            f.setParentFileRelativePath(parentFileRelativePath);
             if (file.isDirectory()){
                 f.setFileType(FILE_TYPE_FOLDER);
                 f.setFilePath(f.getFilePath()+"/");

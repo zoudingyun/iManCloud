@@ -67,10 +67,10 @@ layui.use('table', function(){
         active[type] ? active[type].call(this) : '';
     });
 
-    f("/");
+    f("./");
 });
 
-function f(path) {
+function f(path,ppath) {
     $.ajax( {
             type: "POST",
             contentType: "application/json",
