@@ -1,3 +1,5 @@
+var pwd=[];
+
 $(function () {
     // $.addtabs.set({iframe:false})
     console.log('欢迎使用LanaiUI')
@@ -70,7 +72,7 @@ layui.use('table', function(){
     f("./");
 });
 
-function f(path,ppath) {
+function f(path) {
     $.ajax( {
             type: "POST",
             contentType: "application/json",
@@ -80,13 +82,11 @@ function f(path,ppath) {
                if (response.code == 200){
                     var dat = response.data;
                     var data =new Array();
-                    if (path!="/"){
+                    if (path!="./"){
                         var upPath="";
-                        var p = path.split("/");
-                        if (p.length>1){
-                            for (var i=0;i<p.length-2;i++){
-                                upPath+=p[i]+"/";
-                            }
+                        pwd = path.split("/");
+                        for (var i=0;i<pwd.length-2;i++){
+                            upPath+=pwd[i]+"/";
                         }
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
                         params.fileName = "<div class='fileName' onclick='f(\""+upPath+"\")'><i class='fa fa-mail-reply'></i> ...</div>";
@@ -97,7 +97,7 @@ function f(path,ppath) {
                         var file = dat[i].filePath.split('/');
                         var fileName = dat[i].fileName;
                         if (dat[i].fileType.indexOf('folder')==0){
-                            fileName = "<div class='fileName' onclick='f(\""+dat[i].filePath+"\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
+                            fileName = "<div class='fileName' onclick='f(\""+dat[i].fileRelativePath+"/\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
                         }else if (dat[i].fileType.indexOf('mov')==0) {
                             fileName = "<div class='fileName' onclick='alert(\"下载\")'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
                         }else {
