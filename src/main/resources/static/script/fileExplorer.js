@@ -1,4 +1,5 @@
 var pwd=[];
+var upPath="";
 
 $(function () {
     // $.addtabs.set({iframe:false})
@@ -72,6 +73,10 @@ layui.use('table', function(){
     f("./");
 });
 
+function re(){
+    f(upPath);
+}
+
 function f(path) {
     $.ajax( {
             type: "POST",
@@ -82,15 +87,15 @@ function f(path) {
                if (response.code == 200){
                     var dat = response.data;
                     var data =new Array();
+                   pwd = path.split("/");
+                   upPath = "";
+                   for (var i=0;i<pwd.length-2;i++){
+                       upPath+=pwd[i]+"/";
+                   }
                     if (path!="./"){
-                        var upPath="";
-                        pwd = path.split("/");
-                        for (var i=0;i<pwd.length-2;i++){
-                            upPath+=pwd[i]+"/";
-                        }
-                        var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
-                        params.fileName = "<div class='fileName' onclick='f(\""+upPath+"\")'><i class='fa fa-mail-reply'></i> ...</div>";
-                        data.push(params);
+                        $("#return").show();
+                    }else {
+                        $("#return").hide();
                     }
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
