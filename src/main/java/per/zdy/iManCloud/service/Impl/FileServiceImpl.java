@@ -33,21 +33,20 @@ public class FileServiceImpl implements FileService {
 
     public List<FilePath> queryUserFilePathFromDbRecord(String userName, String parentPath){
         if (null == parentPath){
-            parentPath = "";
+            parentPath = FileUtil.getAbsolutePath(FILE_PATH)+"/"+userName+"/";
         }
+        if (parentPath.equals("/")){
+            parentPath=FileUtil.getAbsolutePath(FILE_PATH)+"/"+userName+"/";
+        }
+        if(!FileUtil.isAbsolutePath(parentPath)){
+            parentPath = FileUtil.getAbsolutePath(parentPath);
+        }
+        parentPath = parentPath.replace('\\','/');
         List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath+"%",parentPath,parentPath+"/");
         List<FilePath> reList = new ArrayList<>();
         for (int i= 0;i<filePaths.size();i++){
             String filePath = filePaths.get(i).getFilePath();
             filePath = filePath.substring(parentPath.length());
-            if (filePath.indexOf("/")>0){
-                reList.add(filePaths.get(i));
-            }else if (filePath.indexOf("/")==0){
-                filePath = filePath.substring(1);
-                if (filePath.indexOf("/")>=0){
-                    reList.add(filePaths.get(i));
-                }
-            }
         }
         for (FilePath integer:reList){
             filePaths.remove(integer);
@@ -79,12 +78,13 @@ public class FileServiceImpl implements FileService {
         List<FilePath> filePathList = new ArrayList<>();
         for (File file:files){
             FilePath f=new FilePath();
-            f.setFilePath(file.getPath());
+            f.setFilePath(file.getPath().replace('\\','/'));
             f.setUserName(username);
-            f.setParentPath(file.getParent());
+            f.setParentPath(file.getParent().replace('\\','/')+"/");
             f.setFileName(file.getName());
             if (file.isDirectory()){
                 f.setFileType(FILE_TYPE_FOLDER);
+                f.setFilePath(f.getFilePath()+"/");
                 filePathList.addAll(getPath(f.getFilePath(),username));
             }else {
                 f.setFileType(FILE_TYPE_FILE);

@@ -81,11 +81,11 @@ function f(path) {
                     var dat = response.data;
                     var data =new Array();
                     if (path!="/"){
-                        var upPath="/";
+                        var upPath="";
                         var p = path.split("/");
                         if (p.length>1){
-                            for (var i=0;i<p.length-1;i++){
-                                upPath+=p[i];
+                            for (var i=0;i<p.length-2;i++){
+                                upPath+=p[i]+"/";
                             }
                         }
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
@@ -95,7 +95,7 @@ function f(path) {
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
                         var file = dat[i].filePath.split('/');
-                        var fileName = file[file.length-1];
+                        var fileName = dat[i].fileName;
                         if (dat[i].fileType.indexOf('folder')==0){
                             fileName = "<div class='fileName' onclick='f(\""+dat[i].filePath+"\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
                         }else if (dat[i].fileType.indexOf('mov')==0) {

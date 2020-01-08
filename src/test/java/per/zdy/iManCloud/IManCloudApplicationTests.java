@@ -1,5 +1,6 @@
 package per.zdy.iManCloud;
 
+import cn.hutool.core.io.FileUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,6 +47,12 @@ class IManCloudApplicationTests {
     void testFileSystem(){
 
         List<FilePath> filePathList = fileService.queryUserFilePathFromFileSystem("admin");
+        return;
+    }
+
+    @Test
+    void testRealPath(){
+        String s = FileUtil.getAbsolutePath("./");
         return;
     }
 
