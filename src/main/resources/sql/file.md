@@ -1,7 +1,9 @@
 queryUserFilePath
 ===
     
-    SELECT * FROM FILE_PATH  where user_Name = #userName# and PARENT_FILE_RELATIVE_PATH = #parentPath# 
+    SELECT * FROM FILE_PATH  where user_Name = #userName# and PARENT_FILE_RELATIVE_PATH = #parentPath# and FILE_TYPE like 'folder%'
+    union all
+    SELECT * FROM FILE_PATH  where user_Name = #userName# and PARENT_FILE_RELATIVE_PATH = #parentPath# and FILE_TYPE not like 'folder%'
     
 insertUserFilePath
 ===
