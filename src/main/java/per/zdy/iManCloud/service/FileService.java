@@ -19,14 +19,22 @@ public interface FileService {
 
     /**
      * 检查用户目录下指定路径的文件路径列表
-     *
+     * @param userName:当前用户
+     * @param parentPath :检查的目录
      * */
     public List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath);
 
     /**
      * 检查用户目录下指定文件路径列表
-     * @param userName:用户名
+     * @param userName:当前用户
      * */
     public List<FilePath> queryUserFilePathFromFileSystem(String userName);
+
+    /**
+     * 插入用户路径信息
+     * @param userName：当前用户
+     * */
+    public void insertUserFilePath(String userName);
+
 
 }

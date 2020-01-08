@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * 系统基础配置
+ * 文件信息
  * @author zdy
  * */
 @Entity
@@ -16,6 +16,24 @@ public class FilePath {
     String filePath;
     String userName;
     String fileType;
+    String parentPath;
+    String fileName;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getParentPath() {
+        return parentPath;
+    }
+
+    public void setParentPath(String parentPath) {
+        this.parentPath = parentPath;
+    }
 
     public String getFilePath() {
         return filePath;

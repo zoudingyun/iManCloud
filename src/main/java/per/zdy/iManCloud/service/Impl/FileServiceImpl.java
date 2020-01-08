@@ -61,10 +61,17 @@ public class FileServiceImpl implements FileService {
 
     public List<FilePath> queryUserFilePathFromFileSystem(String userName){
         String userPath = FILE_PATH+"/"+userName;
-        if (!pathIsExist(userPath)){
+        if (!FileUtil.exist(userPath)||!FileUtil.isDirectory(userPath)){
             FileUtil.mkdir(userPath);
         }
         return getPath(userPath,userName);
+    }
+
+    public void insertUserFilePath(String userName){
+        List<FilePath> filePathList = queryUserFilePathFromFileSystem(userName);
+        for (FilePath filePath:filePathList){
+            fileDao.insertUserFilePath(filePath);
+        }
     }
 
     List<FilePath> getPath(String path,String username){
@@ -74,6 +81,8 @@ public class FileServiceImpl implements FileService {
             FilePath f=new FilePath();
             f.setFilePath(file.getPath());
             f.setUserName(username);
+            f.setParentPath(file.getParent());
+            f.setFileName(file.getName());
             if (file.isDirectory()){
                 f.setFileType(FILE_TYPE_FOLDER);
                 filePathList.addAll(getPath(f.getFilePath(),username));
