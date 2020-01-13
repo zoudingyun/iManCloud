@@ -245,10 +245,15 @@
                                     <div class="col-sm-12">
                                     	<!--文件浏览器-->
                                         <div class="layui-btn-group demoTable">
-                                            <button class="layui-btn" id="return" style="display: none" onclick="re()"><i class='fa fa-mail-reply'></i></button>
+
                                             <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
                                             <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
                                             <button class="layui-btn" data-type="isAll">验证是否全选</button>
+                                        </div>
+                                        <div style="margin-top: 5px">
+                                            <div style="color: #00a2d4;cursor:pointer;margin-right: 10px;float: left" id="return" onclick="re()"><i class='fa fa-mail-reply'></i> 返回上一级 </div>
+                                            <div id="homeTag" style="display: none"><i class="fa fa-home"></i> 全部文件 </div>
+                                            <div style="float: left" id="pathUrl"></div>
                                         </div>
                                         <div id="fileExplorer"></div>
                                     </div>

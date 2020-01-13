@@ -92,10 +92,31 @@ function f(path) {
                    for (var i=0;i<pwd.length-2;i++){
                        upPath+=pwd[i]+"/";
                    }
-                    if (path!="./"){
-                        $("#return").show();
-                    }else {
+                    if (path=="./"){
                         $("#return").hide();
+                        $('#homeTag').show();
+                    }else {
+                        $("#return").show();
+                        $('#homeTag').hide();
+                    }
+                    var urlStr='| ';
+                    for (var i=0;i<pwd.length-1;i++){
+                        if (i<pwd.length-2){
+                            var pName = '';
+                            if (pwd[i]=='.'){
+                                pName = '全部文件';
+                            }else {
+                                pName = pwd[i];
+                            }
+                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pwd[i]+"/\")'>"+pName+"</span><span> > </span>";
+                        }else {
+                            urlStr+="<span>"+pwd[i]+"</span>";
+                        }
+                    }
+                    if (pwd.length>2){
+                        $("#pathUrl").html(urlStr);
+                    }else {
+                        $("#pathUrl").html('');
                     }
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
