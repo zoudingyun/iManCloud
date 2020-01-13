@@ -8,7 +8,7 @@ queryUserFilePath
 insertUserFilePath
 ===
     
-    insert into FILE_PATH(FILE_PATH,FILE_TYPE,USER_NAME,PARENT_PATH,FILE_NAME,FILE_RELATIVE_PATH ) 
+    insert into FILE_PATH(FILE_PATH,FILE_TYPE,USER_NAME,PARENT_PATH,FILE_NAME,FILE_RELATIVE_PATH,PARENT_FILE_RELATIVE_PATH ) 
     values( #filePath.filePath#,
             #fileType#,
             #userName#,

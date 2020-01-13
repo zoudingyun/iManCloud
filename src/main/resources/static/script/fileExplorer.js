@@ -99,6 +99,7 @@ function f(path) {
                         $("#return").show();
                         $('#homeTag').hide();
                     }
+                    var pwdStr='';
                     var urlStr='| ';
                     for (var i=0;i<pwd.length-1;i++){
                         if (i<pwd.length-2){
@@ -108,7 +109,8 @@ function f(path) {
                             }else {
                                 pName = pwd[i];
                             }
-                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pwd[i]+"/\")'>"+pName+"</span><span> > </span>";
+                            pwdStr+=pwd[i]+'/';
+                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pwdStr+"\")'>"+pName+"</span><span> > </span>";
                         }else {
                             urlStr+="<span>"+pwd[i]+"</span>";
                         }
