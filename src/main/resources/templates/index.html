@@ -9,8 +9,30 @@
     <title>IManCLoud</title>
     <link href="dist/css/lanai-ui.min.css" rel="stylesheet" />
     <link href="dist/layui/css/layui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/themes/webuploader.css">
     <link href="themes/fileExplorer.css" rel="stylesheet"/>
 </head>
+<style type="text/css">
+
+    .wu-example {
+        width: 847px;
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 auto;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, .05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+    }
+
+    #picker {
+        display: inline-block;
+        line-height: 1.428571429;
+        vertical-align: middle;
+        margin: 0 12px 0 0;
+    }
+</style>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <!-- Main Header -->
@@ -247,7 +269,7 @@
                                         <div class="layui-btn-group demoTable">
                                             <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件</button>
                                             <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-file-zip-o' style="margin-right: 5px"></i>打包下载</button>
-                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-upload' style="margin-right: 5px"></i>上传文件</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-widget="chat-small-open" onclick="upload()" ><i class='fa fa-upload' style="margin-right: 5px"></i>上传文件</button>
                                             <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-remove' style="margin-right: 5px"></i>删除文件</button>
                                             <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-refresh' style="margin-right: 5px"></i>刷新列表</button>
                                             <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-hdd-o' style="margin-right: 5px"></i>硬盘更新</button>
@@ -257,7 +279,7 @@
                                         </div>
                                         <div style="margin-top: 5px;">
                                             <div style="color: #00a2d4;cursor:pointer;margin-right: 10px;float: left" id="return" onclick="re()"><i class='fa fa-mail-reply'></i> 返回上一级 </div>
-                                            <div id="homeTag" style="display: none"><i class="fa fa-home"></i> 根目录 </div>
+                                            <div id="homeTag" style="display: none"><i class="fa fa-cubes"></i> 根目录 </div>
                                             <div id="pathUrl"></div>
                                         </div>
                                         <div id="fileExplorer"></div>
@@ -606,11 +628,11 @@
         <div class="box small-chat-box direct-chat direct-chat-primary  fadeInRight animated"
             data-widget="chat-small-box">
             <div class="box-header with-border">
-                <h3 class="box-title" id="chatTitle">LAI聊</h3>
+                <h3 class="box-title" id="chatTitle">文件上传</h3>
                 <div class="box-tools pull-right">
                     <button type="button" id="btn_showContacts" class="btn btn-box-tool" data-toggle="tooltip" title=""
                         data-widget="chat-pane-toggle" data-original-title="Contacts">
-                        <i class="fa fa-comments"></i>
+                        <i class="fa fa-upload"></i>
                     </button>
                 </div>
             </div>
@@ -672,21 +694,32 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <form action="#" method="post">
                     <div class="input-group">
                         <input type="text" id="message" name="message" placeholder="输入信息 ..." class="form-control">
+                        <div id="uploader" class="wu-example">
+                            <!--用来存放文件信息-->
+                            <div id="thelist" class="uploader-list"></div>
+                            <div class="btns">
+                                <div id="picker">选择文件</div>
+                                <button id="ctlBtn" class="btn btn-default">开始上传</button>
+                            </div>
+                            <p>
+                                <span>上传所用时间:</span>
+                                <span id="useTime">0</span>s
+                            </p>
+                        </div>
                         <span class="input-group-btn">
-                            <button type="button" id="sendmessage" class="btn btn-primary btn-flat">发送</button>
+                            <button type="button" id="chooseFiles" class="btn btn-primary btn-flat">选择文件</button>
+                            <button type="button" id="chooseFolder" class="btn btn-primary btn-flat">选择文件夹</button>
                         </span>
                     </div>
-                </form>
             </div>
             <!-- /.box-footer-->
         </div>
         <div class="chat-area">
             <span class="badge badge-warning pull-right msgCount">2</span>
-            <a class="open-small-chat" data-widget="chat-small-open" style="cursor: pointer">
-                <i class="fa fa-comments"></i>
+            <a class="open-small-chat" data-widget="chat-small-open" onclick="upload()" style="cursor: pointer">
+                <i class="fa fa-plus"></i>
             </a>
         </div>
         <!-- /. Chat-Area-->
@@ -729,6 +762,7 @@
     <!-- <script src="dist/js/lanai-ui.min.js"></script> -->
     <script src="dist/js/lanai-ui.min.js"></script>
     <script src="dist/layui/layui.js"></script>
+    <script type="text/javascript" src="/script/webuploader.js"></script>
     <script src="index.js"></script>
     <script src="script/fileExplorer.js"></script>
     
