@@ -18,6 +18,8 @@ import per.zdy.iManCloud.service.LoginService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
+import static per.zdy.iManCloud.share.PublicValue.FILE_PATH;
+
 @Controller
 @ResponseBody
 public class AdminController {
@@ -78,10 +80,6 @@ public class AdminController {
     }
 
     private static String FILENAME = "";
-
-
-    @Value("${xdja.upload.file.path}")
-    private String decryptFilePath;
 
     @Value("${xdja.upload.file.path.temp}")
     private String decryptFilePathTemp;
@@ -153,14 +151,15 @@ public class AdminController {
     @GetMapping("/merge")
     @ResponseBody
     public void byteMergeAll(String guid) throws Exception {
+        User user = loginService.getUserByName(SecurityUtils.getSubject().getPrincipal().toString());
         System.out.println("merge:"+guid);
         File file = new File(decryptFilePathTemp+File.separator+guid);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (files != null && files.length > 0) {
-                File partFile = new File(decryptFilePath + File.separator + FILENAME);
+                File partFile = new File(FILE_PATH+"/"+user.getUserName() + File.separator + FILENAME);
                 for (int i = 0; i < files.length; i++) {
-                    File s = new File(decryptFilePathTemp+File.separator+guid, i + ".part");
+                    File s = new File(FILE_PATH+"/tmp"+File.separator+guid, i + ".part");
                     FileOutputStream destTempfos = new FileOutputStream(partFile, true);
                     FileUtils.copyFile(s, destTempfos);
                     destTempfos.close();
