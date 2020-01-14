@@ -245,17 +245,21 @@
                                     <div class="col-sm-12">
                                     	<!--文件浏览器-->
                                         <div class="layui-btn-group demoTable">
-
-                                            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-file-zip-o' style="margin-right: 5px"></i>打包下载</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-upload' style="margin-right: 5px"></i>上传文件</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-remove' style="margin-right: 5px"></i>删除文件</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-refresh' style="margin-right: 5px"></i>刷新列表</button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;border-left: 1px solid #c9c9c9;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-hdd-o' style="margin-right: 5px"></i>硬盘更新</button>
+                                            <!--<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
                                             <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-                                            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+                                            <button class="layui-btn" data-type="isAll">验证是否全选</button>-->
                                         </div>
-                                        <div style="margin-top: 5px;height: 0px">
+                                        <div style="margin-top: 5px;">
                                             <div style="color: #00a2d4;cursor:pointer;margin-right: 10px;float: left" id="return" onclick="re()"><i class='fa fa-mail-reply'></i> 返回上一级 </div>
                                             <div id="homeTag" style="display: none"><i class="fa fa-home"></i> 根目录 </div>
-                                            <div style="float: left" id="pathUrl"></div>
+                                            <div id="pathUrl"></div>
                                         </div>
-                                        <br>
                                         <div id="fileExplorer"></div>
                                     </div>
                                 </div>
