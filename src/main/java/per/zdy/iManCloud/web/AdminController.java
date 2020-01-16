@@ -1,6 +1,7 @@
 package per.zdy.iManCloud.web;
 
 
+import cn.hutool.core.io.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -138,7 +139,7 @@ public class AdminController {
             if (chunks == null && chunk == null) {
                 chunk = 0;
             }
-            File outFile = new File(decryptFilePathTemp+File.separator+guid, chunk + ".part");
+            File outFile = FileUtil.touch(FILE_PATH+"/tmp/"+guid+'/'+chunk + ".part");
             if ("".equals(FILENAME)) {
                 FILENAME = name;
             }
@@ -161,14 +162,14 @@ public class AdminController {
         //查询文件目标路径
         String[] targetPath = guid2path.get(guid).split("\\.");
         guid2path.remove(guid);
-        
-        File file = new File(decryptFilePathTemp+File.separator+guid);
+
+        File file = FileUtil.touch(FILE_PATH+"/tmp/"+guid);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (files != null && files.length > 0) {
-                File partFile = new File(FILE_PATH+"/"+user.getUserName()+ targetPath[1] + File.separator + FILENAME);
+                File partFile = FileUtil.touch(FILE_PATH+"/"+user.getUserName()+ targetPath[1] + "/" + FILENAME);
                 for (int i = 0; i < files.length; i++) {
-                    File s = new File(FILE_PATH+"/tmp"+File.separator+guid, i + ".part");
+                    File s = FileUtil.touch(FILE_PATH+"/tmp/"+guid+'/'+i + ".part");
                     FileOutputStream destTempfos = new FileOutputStream(partFile, true);
                     FileUtils.copyFile(s, destTempfos);
                     destTempfos.close();
