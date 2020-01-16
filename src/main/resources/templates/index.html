@@ -637,83 +637,31 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body" id="chatBody">
+            <div class="box-body" id="chatBody" style="height: 300px">
                 <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages" id="listmsg">
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left"  th:text="${nickname}"></span>
-                            <span class="direct-chat-timestamp pull-right">18/02/05 6:00am</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="dist/img/sl.jpg" alt="Message User Image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            早上好
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-right">娜美</span>
-                            <span class="direct-chat-timestamp pull-left">18/02/05 7:00am</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="dist/img/nm.jpg" alt="Message User Image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            早上好!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                </div>
-                <!--/.direct-chat-messages-->
-                <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts">
-                    <ul class="contacts-list">
-                        <li>
-                            <a href="javascript:;" data-widget="chat-pane-toggle">
-                                <img src="dist/img/nm.jpg" class="contacts-list-img" />
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Polo
-                                        <small class="contacts-list-date pull-right"><i
-                                                class="fa fa-circle text-danger"></i> 离线</small>
-                                    </span>
-                                    <span class="contacts-list-msg">娜美@gmail.com</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.contatcts-list -->
-                </div>
-                <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                    <div class="input-group">
-                        <input type="text" id="message" name="message" placeholder="输入信息 ..." class="form-control">
-                        <div id="uploader" class="wu-example">
+                <div class="box-footer">
+                    <div class="input-group" style="width: 100%">
+                        <div id="uploader" class="wu-example" style="width: 100%;height: 285px;position: absolute;">
                             <!--用来存放文件信息-->
-                            <div id="thelist" class="uploader-list"></div>
-                            <div class="btns">
+                            <div id="thelist" class="uploader-list" style="height: 200px;position: absolute;top: 0px;width: calc(100% - 15px);overflow:auto"></div>
+                            <div class="btns" style="position: absolute;bottom: 0px">
                                 <div id="picker">选择文件</div>
                                 <button id="ctlBtn" class="btn btn-default">开始上传</button>
                             </div>
-                            <p>
+                            <!--<p>
                                 <span>上传所用时间:</span>
                                 <span id="useTime">0</span>s
-                            </p>
+                            </p>-->
                         </div>
-                        <span class="input-group-btn">
+                        <!--<span class="input-group-btn" id="buttag">
                             <button type="button" id="chooseFiles" class="btn btn-primary btn-flat">选择文件</button>
                             <button type="button" id="chooseFolder" class="btn btn-primary btn-flat">选择文件夹</button>
-                        </span>
+                        </span>-->
                     </div>
+                </div>
             </div>
+            <!-- /.box-body -->
+
             <!-- /.box-footer-->
         </div>
         <div class="chat-area">
