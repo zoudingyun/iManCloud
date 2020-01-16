@@ -188,6 +188,10 @@ function upload() {
             chunkSize: 10485760,
             formData: {
                 guid: ""
+            },
+            accept: {
+                extensions:'*' ,
+                mimeTypes: '*'
             }
         });
 

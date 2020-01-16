@@ -628,11 +628,11 @@
         <div class="box small-chat-box direct-chat direct-chat-primary  fadeInRight animated"
             data-widget="chat-small-box">
             <div class="box-header with-border">
-                <h3 class="box-title" id="chatTitle">文件上传</h3>
+                <h3 class="box-title" id="chatTitle">上传列表</h3>
                 <div class="box-tools pull-right">
                     <button type="button" id="btn_showContacts" class="btn btn-box-tool" data-toggle="tooltip" title=""
-                        data-widget="chat-pane-toggle" data-original-title="Contacts">
-                        <i class="fa fa-upload"></i>
+                            data-widget="chat-small-open"  data-original-title="Contacts">
+                        <i class="fa fa-close"></i>
                     </button>
                 </div>
             </div>
@@ -643,9 +643,9 @@
                     <div class="input-group" style="width: 100%">
                         <div id="uploader" class="wu-example" style="width: 100%;height: 285px;position: absolute;">
                             <!--用来存放文件信息-->
-                            <div id="thelist" class="uploader-list" style="height: 200px;position: absolute;top: 0px;width: calc(100% - 15px);overflow:auto"></div>
-                            <div class="btns" style="position: absolute;bottom: 0px">
-                                <div id="picker">选择文件</div>
+                            <div id="thelist" class="uploader-list" style="height: 200px;position: absolute;top: 10px;width: calc(100% - 15px);overflow:auto"></div>
+                            <div class="btns" style="position: absolute;bottom: 10px">
+                                <div id="picker" >选择文件</div>
                                 <button id="ctlBtn" class="btn btn-default">开始上传</button>
                             </div>
                             <!--<p>

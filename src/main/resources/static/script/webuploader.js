@@ -1725,7 +1725,7 @@
                     opts = me.options,
                     button = opts.button;
     
-                button.addClass('webuploader-pick');
+                button.addClass('btn btn-primary btn-flat');
     
                 me.on( 'all', function( type ) {
                     var files;
