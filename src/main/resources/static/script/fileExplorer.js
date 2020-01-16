@@ -1,6 +1,8 @@
 var pwd=[];
+var pwdStr="";
 var upPath="";
 var upIniFlag=false;
+var uploader;
 
 $(function () {
     // $.addtabs.set({iframe:false})
@@ -100,7 +102,8 @@ function f(path) {
                         $("#return").show();
                         $('#homeTag').hide();
                     }
-                    var pwdStr='';
+                    pwdStr='';
+                    var pStr = '';
                     var urlStr='| ';
                     for (var i=0;i<pwd.length-1;i++){
                         if (i<pwd.length-2){
@@ -110,11 +113,12 @@ function f(path) {
                             }else {
                                 pName = pwd[i];
                             }
-                            pwdStr+=pwd[i]+'/';
-                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pwdStr+"\")'>"+pName+"</span><span> > </span>";
+                            pStr+=pwd[i]+'/';
+                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pStr+"\")'>"+pName+"</span><span> > </span>";
                         }else {
                             urlStr+="<span>"+pwd[i]+"</span>";
                         }
+                        pwdStr+=pwd[i]+'/';
                     }
                     if (pwd.length>2){
                         $("#pathUrl").html(urlStr);
@@ -171,7 +175,7 @@ function upload() {
         var timer;
         var fileArray = [];
 
-        var uploader = WebUploader.create({
+        uploader = WebUploader.create({
 
             // 文件接收服务端。
             server: '/upload',
@@ -187,7 +191,8 @@ function upload() {
             threads: 5,
             chunkSize: 10485760,
             formData: {
-                guid: ""
+                guid: "",
+                path:pwdStr
             },
             accept: {
                 extensions:'*' ,
@@ -206,7 +211,6 @@ function upload() {
 // 当有文件被添加进队列的时候
         uploader.on('fileQueued', function (file) {
             var fileName = file.name;
-            alert(file.name);
             if (fileName.length>=25){
                 fileName = fileName.substring(0,22)+'...';
             }
@@ -276,6 +280,8 @@ function upload() {
         });
         upIniFlag =true;
         $("#buttag").remove();
+    }else {
+        uploader.options.formData.path=pwdStr;
     }
 
 }
