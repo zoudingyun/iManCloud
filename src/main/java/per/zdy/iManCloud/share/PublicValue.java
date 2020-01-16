@@ -2,12 +2,18 @@ package per.zdy.iManCloud.share;
 
 import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PublicValue {
 
     public static String loginMessageReloginCN = "登录信息过期，请重新登录！";
     public static String loginMessageFailedCN = "登录失败，用户名或密码错误！";
     public static String InitializeFailedNullCN = "配置参数不能为空！";
     public static String InitializeFailedCN = "初始化失败！";
+
+    /**上传文件的guid目标路径对照表*/
+    public static Map<String,String> guid2path= new HashMap<>();
 
     //系统公用参数
     /**是否为新安装服务器*/

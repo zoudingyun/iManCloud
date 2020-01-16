@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 import static per.zdy.iManCloud.share.PublicValue.FILE_PATH;
+import static per.zdy.iManCloud.share.PublicValue.guid2path;
 
 @Controller
 @ResponseBody
@@ -124,6 +125,10 @@ public class AdminController {
     @PostMapping("/upload")
     @ResponseBody
     public ResponseEntity<Void> decrypt(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file, Integer chunks, Integer chunk, String name, String guid,String path) throws IOException {
+        //记录文件目标上传路径
+        if (null==guid2path.get(guid)){
+            guid2path.put(guid,path);
+        }
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (isMultipart) {
             if (file == null) {
@@ -153,11 +158,15 @@ public class AdminController {
     public void byteMergeAll(String guid) throws Exception {
         User user = loginService.getUserByName(SecurityUtils.getSubject().getPrincipal().toString());
         System.out.println("merge:"+guid);
+        //查询文件目标路径
+        String[] targetPath = guid2path.get(guid).split("\\.");
+        guid2path.remove(guid);
+        
         File file = new File(decryptFilePathTemp+File.separator+guid);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (files != null && files.length > 0) {
-                File partFile = new File(FILE_PATH+"/"+user.getUserName() + File.separator + FILENAME);
+                File partFile = new File(FILE_PATH+"/"+user.getUserName()+ targetPath[1] + File.separator + FILENAME);
                 for (int i = 0; i < files.length; i++) {
                     File s = new File(FILE_PATH+"/tmp"+File.separator+guid, i + ".part");
                     FileOutputStream destTempfos = new FileOutputStream(partFile, true);
