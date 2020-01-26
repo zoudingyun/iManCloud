@@ -20,4 +20,6 @@ public interface FileDao {
 
     public void insertUserFilePath(FilePath filePath);
 
+    public void deleteUserFilePath(FilePath filePath);
+
 }

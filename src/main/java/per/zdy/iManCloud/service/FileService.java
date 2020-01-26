@@ -40,7 +40,7 @@ public interface FileService {
      * 更新用户当前路径下的文件信息
      * @param userName：当前用户
      * */
-    public void updateUserFilePath(String userName);
+    public void updateUserFilePath(String userName,FilePath nowPath);
 
 
 }

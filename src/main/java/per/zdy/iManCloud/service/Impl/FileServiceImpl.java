@@ -21,6 +21,7 @@ public class FileServiceImpl implements FileService {
     @Autowired
     FileDao fileDao;
 
+
     public void queryChildPaths(String path){
         File[] a = ls(path);
         a[0].isDirectory();
@@ -57,6 +58,16 @@ public class FileServiceImpl implements FileService {
         List<FilePath> filePathList = queryUserFilePathFromFileSystem(userName);
         for (FilePath filePath:filePathList){
             fileDao.insertUserFilePath(filePath);
+        }
+    }
+
+    public void updateUserFilePath(String userName,FilePath nowPath){
+
+        List<FilePath> filePaths = fileDao.queryUserFilePath(userName,nowPath.getFilePath());
+        for (FilePath filePath:filePaths){
+            if (!FileUtil.exist(filePath.getFilePath())){
+                fileDao.deleteUserFilePath(filePath);
+            }
         }
     }
 

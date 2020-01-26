@@ -47,7 +47,7 @@ public class FileExplorerController {
     @CrossOrigin
     public Result updateFilePathByPath(@RequestBody FilePath filePath) {
         try{
-            fileService.insertUserFilePath(SecurityUtils.getSubject().getPrincipal().toString());
+            fileService.updateUserFilePath(SecurityUtils.getSubject().getPrincipal().toString(),filePath);
             return ResultGenerator.genSuccessResult();
         }catch (Exception ex){
             ex.printStackTrace();

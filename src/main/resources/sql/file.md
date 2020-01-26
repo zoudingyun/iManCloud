@@ -17,3 +17,8 @@ insertUserFilePath
             #fileRelativePath#,
             #parentFileRelativePath#
             )
+
+deleteUserFilePath
+===
+    
+    DELETE FROM FILE_PATH WHERE FILE_PATH = #filePath.filePath#
