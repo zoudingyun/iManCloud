@@ -43,6 +43,18 @@ public class FileExplorerController {
         }
     }
 
+    @PostMapping("/updateFilePathByPath")
+    @CrossOrigin
+    public Result updateFilePathByPath(@RequestBody FilePath filePath) {
+        try{
+            fileService.insertUserFilePath(SecurityUtils.getSubject().getPrincipal().toString());
+            return ResultGenerator.genSuccessResult();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResultGenerator.genFailResult(ex.getMessage());
+        }
+    }
+
     /**
      * 查询当前用户的文件列表（根目录）
      * */
