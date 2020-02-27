@@ -414,3 +414,23 @@ $(function () {
         $.LanaiMenu(Menu, { EnableNav: $('[data-enableNav="toggle"]:checked').length > 0 })
     })
 })
+
+function hddReload() {
+    var param={'filePath':"/"};
+    alert(window.location.href.split(':')[0] + '://' + window.location.host);
+
+    $.ajax( {
+            type: "POST",
+            contentType: "application/json",
+            url: window.location.href.split(':')[0] + '://' + window.location.host+'/fileExplorerController/updateFilePath',
+            data: JSON.stringify(param),
+            success:function(response) {
+                alert('保存成功');
+            },
+            dataSrc:function(data)
+            {
+                return data.data;
+            }
+        }
+    );
+}
