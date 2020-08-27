@@ -274,12 +274,16 @@ function SmartWizard(target, options) {
                 }
             }
             if (($this.steps.length-1) <= $this.curStepIdx){
-                $($this.buttons.next).addClass("buttonDisabled");
+                //$($this.buttons.next).addClass("buttonDisabled");
+                $($this.buttons.next).html("提交");
+                $($this.buttons.next).attr("onclick","sendConf();");
                 if ($this.options.hideButtonsOnDisabled) {
                     $($this.buttons.next).hide();
                 }
             }else{
                 $($this.buttons.next).removeClass("buttonDisabled");
+                $($this.buttons.next).html("下一页");
+                $($this.buttons.next).removeAttr("onclick");
                 if ($this.options.hideButtonsOnDisabled) {
                     $($this.buttons.next).show();
                 }

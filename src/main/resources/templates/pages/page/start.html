@@ -93,6 +93,14 @@
                                 <input type="text" value="./" id="filePath" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label id="webUrlLab" class="control-label col-md-3 col-sm-3 col-xs-12" for="webName">
+                                站点地址 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="webUrl" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div id="step-3">
@@ -101,7 +109,7 @@
 
                         </label>
                         <div class=" col-md-8 col-sm-8 col-xs-12">
-                            <section class="form-control content no-padding col-md-6 col-xs-12 swMain">
+                            <section class="form-control content no-padding col-md-6 col-xs-12 swMain" style="border:0px solid #ccc">
                                 <div class="box box-widget no-shadow">
                                     <div class="box-body">
                                         <ul class="timeline">
@@ -172,6 +180,14 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            <li>
+                                                <i class="fa fa-gear bg-blue"></i>
+                                                <div class="timeline-item no-shadow">
+                                                    <h3 class="timeline-header"><a>站点地址</a> </h3>
+                                                    <div class="timeline-body" id="webUrlCheck">
+                                                    </div>
+                                                </div>
+                                            </li>
                                             <!-- END timeline item -->
                                             <!-- timeline item -->
 
@@ -183,7 +199,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <div onclick="sendConf()"  style="margin-top: 10px"><i class="fa fa-send "></i> 保存设置</div>
+                            <div onclick="sendConf()" class="btn btn-primary"  style="margin-top: 10px"><i class="fa fa-send "></i> 保存设置</div>
                         </div>
 
                     </form>
@@ -219,6 +235,8 @@
 
         $('.buttonNext').addClass('btn btn-success');
         $('.buttonPrevious').addClass('btn btn-primary');
+        $('#webUrl').val("http://localhost:8080/")
+
     });
     $("#togglePassword").click(function () {
         var hClass= $("#togglePassword").hasClass("fa-eye");
@@ -296,13 +314,14 @@
                 $("#adminPwdCheck").val($("#adminPwd").val());
                 $("#adminNameCheck").html($("#adminName").val());
                 $("#filePathCheck").html($("#filePath").val());
+                $("#webUrlCheck").html($("#webUrl").val());
             }
         }
 
     }
     function sendConf() {
 
-        var param={'webName':$("#webName").val(),'adminId':$("#adminId").val(),'adminPwd':$("#adminPwd").val(),'adminName':$("#adminName").val(),'filePath':$("#filePath").val()};
+        var param={'webName':$("#webName").val(),'adminId':$("#adminId").val(),'adminPwd':$("#adminPwd").val(),'adminName':$("#adminName").val(),'filePath':$("#filePath").val(),'webUrl':$("#webUrl").val()};
 
         $.ajax( {
                 type: "POST",
@@ -311,7 +330,7 @@
                 data: JSON.stringify(param),
                 success:function(response) {
                     alert('保存成功');
-                    location.href='http://localhost:8080/';
+                    location.href= $('#webUrl').val();
                 },
                 dataSrc:function(data)
                 {
