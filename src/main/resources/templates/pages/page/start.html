@@ -183,7 +183,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <button onclick="sendConf()" class="btn btn-primary" style="margin-top: 10px"><i class="fa fa-send "></i> 保存设置</button>
+                            <div onclick="sendConf()"  style="margin-top: 10px"><i class="fa fa-send "></i> 保存设置</div>
                         </div>
 
                     </form>
@@ -311,6 +311,7 @@
                 data: JSON.stringify(param),
                 success:function(response) {
                     alert('保存成功');
+                    location.href='http://localhost:8080/';
                 },
                 dataSrc:function(data)
                 {

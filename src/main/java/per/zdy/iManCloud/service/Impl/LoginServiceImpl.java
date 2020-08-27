@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean isNewService(){
-        if (null==NEW_SYSTEM){
+        if ((null==NEW_SYSTEM)||NEW_SYSTEM){
             if (userDao.queryUserCount()>0){
                 NEW_SYSTEM = false;
                 return false;
@@ -47,6 +47,7 @@ public class LoginServiceImpl implements LoginService {
 
     }
 
+    @Override
     public void systemConf(ServerConfInitialize serverConfInitialize){
         systemDao.addUser(serverConfInitialize.getAdminId(),serverConfInitialize.getAdminPwd(),serverConfInitialize.getAdminName());
         systemDao.addSystemConf("WEB-NAME",serverConfInitialize.getWebName());
@@ -61,6 +62,7 @@ public class LoginServiceImpl implements LoginService {
         systemDao.addRolePermissions("admin","superAdmin");
     }
 
+    @Override
     public void renovateSystemConf(){
         renovateSystemConfig(systemDao.querySystemConf());
     }

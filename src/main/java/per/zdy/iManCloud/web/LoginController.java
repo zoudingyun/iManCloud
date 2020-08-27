@@ -76,6 +76,7 @@ public class LoginController {
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView();
+        mv.setViewName("/pages/page/login.html");
         if (loginService.isNewService()){
             mv.addObject("url","/start");
             mv.setViewName("/pages/page/goto.html");
@@ -98,7 +99,8 @@ public class LoginController {
             if (fileService.pathIsExist(serverConfInitialize.getFilePath())){
                 try{
                     loginService.systemConf(serverConfInitialize);
-                    mv.addObject("url","/login");
+                    Boolean a  = loginService.isNewService();
+                    mv.addObject("url","/");
                     mv.setViewName("/pages/page/goto.html");
                     loginService.renovateSystemConf();
                 }catch (Exception ex){
