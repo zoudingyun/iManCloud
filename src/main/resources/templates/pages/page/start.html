@@ -235,7 +235,16 @@
 
         $('.buttonNext').addClass('btn btn-success');
         $('.buttonPrevious').addClass('btn btn-primary');
-        $('#webUrl').val("http://localhost:8080/")
+        var url = window.location.href;
+        var urls = url.split('start');
+        url = "";
+        for (var i=0;i<urls.length-1;i++){
+            url+=urls[i];
+            if (i<(urls.length-1)-1){
+                url+='start';
+            }
+        }
+        $('#webUrl').val(url);
 
     });
     $("#togglePassword").click(function () {
@@ -305,6 +314,17 @@
                 }else {
                     $("#filePathlab").removeClass('errorClass');
                 }
+                if ($("#webUrl").val().length<=0) {
+                    flag = true;
+                    layer.msg("站点地址不能为空！");
+                    $("#webUrlLab").addClass('errorClass');
+                }else if (!isURL($("#webUrl").val())) {
+                    flag = true;
+                    layer.msg("站点地址不合法！");
+                    $("#webUrlLab").addClass('errorClass');
+                }else {
+                    $("#webUrlLab").removeClass('errorClass');
+                }
                 if (flag){
                     throw SyntaxError();
                 }
@@ -319,6 +339,17 @@
         }
 
     }
+    function isURL(URL) {// 验证url
+        var str = URL,
+        Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
+        objExp = new RegExp(Expression);
+        if(objExp.test(str) == true) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     function sendConf() {
 
         var param={'webName':$("#webName").val(),'adminId':$("#adminId").val(),'adminPwd':$("#adminPwd").val(),'adminName':$("#adminName").val(),'filePath':$("#filePath").val(),'webUrl':$("#webUrl").val()};
