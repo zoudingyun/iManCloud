@@ -1,5 +1,6 @@
 package per.zdy.iManCloud.web;
 
+import cn.hutool.core.io.FileUtil;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -8,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+
+import static per.zdy.iManCloud.share.PublicValue.FILE_PATH;
 
 @Controller
 public class DownloadController {
@@ -19,11 +23,12 @@ public class DownloadController {
     @GetMapping("/downloadCacheFile/{fileName:.*}")
     public ResponseEntity<FileSystemResource> downloadCacheFile(@PathVariable("fileName") String fileName) {
         try {
-            String savePath = "C:/迅雷下载/";
             // 获取文件名称，中文可能被URL编码
             fileName = URLDecoder.decode(fileName, "UTF-8");
+            File directory = FileUtil.touch(FILE_PATH +"/admin/"+ fileName);
+
             // 获取本地文件系统中的文件资源
-            FileSystemResource resource = new FileSystemResource(savePath + fileName);
+            FileSystemResource resource = new FileSystemResource(directory.getAbsolutePath());
 
             // 解析文件的 mime 类型
             String mediaTypeStr = URLConnection.getFileNameMap().getContentTypeFor(fileName);

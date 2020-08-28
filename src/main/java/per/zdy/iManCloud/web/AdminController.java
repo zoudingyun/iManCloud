@@ -60,12 +60,14 @@ public class AdminController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
+        //判断文件父目录是否存在
+        if(!dest.getParentFile().exists()){
             dest.getParentFile().mkdir();
         }
         try {
-            byte[] bytes = slice.getBytes(); //保存文件
-            randomAccessFile.seek(index*BYTES_PER_SLICE);
+            //保存文件
+            byte[] bytes = slice.getBytes();
+                randomAccessFile.seek(index*BYTES_PER_SLICE);
             randomAccessFile.write(bytes);
             result = 1;
         } catch (Exception e) {
