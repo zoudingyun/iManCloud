@@ -80,6 +80,12 @@ function re(){
     f(upPath);
 }
 
+function downFile(fileurl) {
+
+    window.open("http://127.0.0.1:8080/downloadCacheFile/"+fileurl)
+
+}
+
 function f(path) {
     $.ajax( {
             type: "POST",
@@ -134,7 +140,7 @@ function f(path) {
                         }else if (dat[i].fileType.indexOf('mov')==0) {
                             fileName = "<div class='fileName' onclick='alert(\"下载\")'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
                         }else {
-                            fileName = "<div class='fileName'><i class='fa  fa-file-o'></i> "+fileName+"</div>";
+                            fileName = "<div class='fileName')'><i class='fa  fa-file-o'></i> <a href=\"http://127.0.0.1:8080/downloadCacheFile/7e2eb66756524eb78a18a36ff85159a6.jpg\" download=\"7e2eb66756524eb78a18a36ff85159a6.jpg\">"+fileName+"</a></div>";
                         }
                         params.fileName = fileName;
                         params.fileSize = "100K";
