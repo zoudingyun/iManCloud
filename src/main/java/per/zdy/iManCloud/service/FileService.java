@@ -4,43 +4,59 @@ import per.zdy.iManCloud.domain.pojo.FilePath;
 
 import java.util.List;
 
+/**
+ * @author zdy
+ * */
 public interface FileService {
 
-    public void queryChildPaths(String path);
+    /**
+     * 查询子路径
+     * @param path 需要查询的父路径
+     * */
+    void queryChildPaths(String path);
 
-    public boolean pathIsExist(String path);
+    /**
+     * 判断路径是否存在
+     * @param path 路径
+     * @return 是否存在
+     * */
+    boolean pathIsExist(String path);
 
     /**
      * 查询数据库中的用户文件记录
      * @param userName：查询用户
      * @param parentPath:查询路径
+     * @return 文件列表
      * */
-    public List<FilePath> queryUserFilePathFromDbRecord(String userName,String parentPath);
+    List<FilePath> queryUserFilePathFromDbRecord(String userName,String parentPath);
 
     /**
      * 检查用户目录下指定路径的文件路径列表
      * @param userName:当前用户
      * @param parentPath :检查的目录
+     * @return 文件列表
      * */
-    public List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath);
+    List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath);
 
     /**
      * 检查用户目录下指定文件路径列表
      * @param userName:当前用户
+     * @return 文件列表
      * */
-    public List<FilePath> queryUserFilePathFromFileSystem(String userName);
+    List<FilePath> queryUserFilePathFromFileSystem(String userName);
 
     /**
      * 插入用户路径信息
      * @param userName：当前用户
      * */
-    public void insertUserFilePath(String userName);
+    void insertUserFilePath(String userName);
 
     /**
      * 更新用户当前路径下的文件信息
      * @param userName：当前用户
+     * @param nowPath 当前所在路径
      * */
-    public void updateUserFilePath(String userName,FilePath nowPath);
+    void updateUserFilePath(String userName,FilePath nowPath);
 
 
 }
