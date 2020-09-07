@@ -36,6 +36,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
+        //shiro 24小时后失效
+        SecurityUtils.getSubject().getSession().setTimeout(24*30*60*1000);
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");
