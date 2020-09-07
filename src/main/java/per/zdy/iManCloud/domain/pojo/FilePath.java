@@ -20,6 +20,8 @@ public class FilePath {
     String fileName;
     String fileRelativePath;
     String parentFileRelativePath;
+    String fileSize;
+    String changeTime;
 
     public String getParentFileRelativePath() {
         return parentFileRelativePath;

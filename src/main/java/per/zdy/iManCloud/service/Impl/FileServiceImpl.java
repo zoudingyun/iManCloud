@@ -38,11 +38,16 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<FilePath> queryUserFilePathFromDbRecord(String userName, String parentPath){
-        if (null == parentPath){
+        String[] queryPathStr = parentPath.split("\\./");
+
+        if (queryPathStr.length<=0){
             parentPath = FILE_PATH+"/"+userName+"/";
+        }else{
+            parentPath = FILE_PATH+"/"+userName+"/"+queryPathStr[1];
         }
         parentPath = parentPath.replace('\\','/');
-        List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath);
+        //List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath);
+        List<FilePath> filePaths =getThisPath(parentPath,userName);
         List<FilePath> reList = new ArrayList<>();
         return filePaths;
     }
@@ -101,6 +106,34 @@ public class FileServiceImpl implements FileService {
                 f.setFileType(FILE_TYPE_FOLDER);
                 f.setFilePath(f.getFilePath()+"/");
                 filePathList.addAll(getPath(f.getFilePath(),username));
+            }else {
+                f.setFileType(FILE_TYPE_FILE);
+            }
+            filePathList.add(f);
+        }
+        return filePathList;
+    }
+
+    List<FilePath> getThisPath(String path,String username){
+        File[] files = ls(path);
+        List<FilePath> filePathList = new ArrayList<>();
+        for (File file:files){
+            FilePath f= new FilePath();
+            f.setFilePath(file.getPath().replace('\\','/'));
+            f.setUserName(username);
+            f.setParentPath(file.getParent().replace('\\','/')+"/");
+            f.setFileName(file.getName());
+            String xdPath = FileUtil.getAbsolutePath(FILE_PATH+"/"+username);
+            f.setFileRelativePath(f.getFilePath().replaceAll(xdPath,"."));
+            String [] fp = f.getFileRelativePath().split("/");
+            String parentFileRelativePath = "";
+            for(int i=0;i<fp.length-1;i++){
+                parentFileRelativePath+=fp[i]+"/";
+            }
+            f.setParentFileRelativePath(parentFileRelativePath);
+            if (file.isDirectory()){
+                f.setFileType(FILE_TYPE_FOLDER);
+                f.setFilePath(f.getFilePath()+"/");
             }else {
                 f.setFileType(FILE_TYPE_FILE);
             }
