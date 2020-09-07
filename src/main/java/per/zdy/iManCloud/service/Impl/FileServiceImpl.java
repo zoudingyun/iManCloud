@@ -1,6 +1,8 @@
 package per.zdy.iManCloud.service.Impl;
 
+import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import per.zdy.iManCloud.domain.dao.FileDao;
@@ -9,7 +11,9 @@ import per.zdy.iManCloud.service.FileService;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static cn.hutool.core.io.FileUtil.*;
@@ -46,7 +50,6 @@ public class FileServiceImpl implements FileService {
             parentPath = FILE_PATH+"/"+userName+"/"+queryPathStr[1];
         }
         parentPath = parentPath.replace('\\','/');
-        //List<FilePath> filePaths = fileDao.queryUserFilePath(userName,parentPath);
         List<FilePath> filePaths =getThisPath(parentPath,userName);
         List<FilePath> reList = new ArrayList<>();
         return filePaths;
@@ -134,9 +137,35 @@ public class FileServiceImpl implements FileService {
             if (file.isDirectory()){
                 f.setFileType(FILE_TYPE_FOLDER);
                 f.setFilePath(f.getFilePath()+"/");
+                f.setDisplayFileSize("--");
             }else {
-                f.setFileType(FILE_TYPE_FILE);
+                f.setFileType(FileTypeUtil.getType(file));
+                long fileSize = file.length();
+                String displayFilesize = "";
+                //文件大于1G
+                if (fileSize>=gbSize){
+                    displayFilesize = (Math.round((fileSize/(gbSize+0F))*100F))/100F+" GB";
+                }else if (fileSize>=mbSize){
+                    //文件大于1M
+                    displayFilesize = (Math.round((fileSize/(mbSize+0F))*100F))/100F+" MB";
+                }else if (fileSize>=kbSize){
+                    //文件大于1KB
+                    displayFilesize = (Math.round((fileSize/(kbSize+0F))*100F))/100F+" KB";
+                }else {
+                    displayFilesize = fileSize+" B";
+                }
+
+                f.setFileSize(fileSize);
+                f.setDisplayFileSize(displayFilesize+"");
+
+                SimpleDateFormat sdf = new SimpleDateFormat(timeFormatNos);
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(file.lastModified());
+
+                f.setChangeTime(sdf.format(cal.getTime()));
+
             }
+
             filePathList.add(f);
         }
         return filePathList;

@@ -133,18 +133,19 @@ function f(path) {
                     }
                     for (var i = 0;i<dat.length;i++){
                         var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
-                        var file = dat[i].filePath.split('/');
+                        var file = dat[i].fileRelativePath.split('./');
+                        var serverPath = dat[i].parentFileRelativePath.replace("./","").replace("/","-");
                         var fileName = dat[i].fileName;
                         if (dat[i].fileType.indexOf('folder')==0){
                             fileName = "<div class='fileName' onclick='f(\""+dat[i].fileRelativePath+"/\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
                         }else if (dat[i].fileType.indexOf('mov')==0) {
                             fileName = "<div class='fileName' onclick='alert(\"下载\")'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
                         }else {
-                            fileName = "<div class='fileName')'><i class='fa  fa-file-o'></i> <a href=\"http://127.0.0.1:8080/downloadCacheFile/7e2eb66756524eb78a18a36ff85159a6.jpg\" download=\"7e2eb66756524eb78a18a36ff85159a6.jpg\">"+fileName+"</a></div>";
+                            fileName = "<div class='fileName')'><i class='fa  fa-file-o'></i> <a href=\"./downloadCacheFile?path="+serverPath+"&fileName="+fileName+"\" download=\""+fileName+"\">"+fileName+"</a></div>";
                         }
                         params.fileName = fileName;
-                        params.fileSize = "100K";
-                        params.changeTime = "2019-12-12";
+                        params.fileSize = dat[i].displayFileSize;
+                        params.changeTime = dat[i].changeTime;
                         params.path = dat[i].filePath;
                         params.fileType = dat[i].fileType;
                         data.push(params);

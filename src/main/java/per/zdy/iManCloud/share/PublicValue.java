@@ -31,6 +31,21 @@ public class PublicValue {
     /**文件类型标识-文件*/
     public static String FILE_TYPE_FILE = "file";
 
+    /**文件大小GB*/
+    public static Long gbSize = 1073741824L;
+
+    /**文件大小MB*/
+    public static Long mbSize = 1048576L;
+
+    /**文件大小KB*/
+    public static Long kbSize = 1024L;
+
+    /**标准时间格式*/
+    public static String timeFormat = "yyyy-MM-dd HH:mm:ss";
+
+    /**无秒时间格式*/
+    public static String timeFormatNos = "yyyy-MM-dd HH:mm";
+
     /**
      * 刷新系统配置缓存
      * @param serverConfInitialize:需要更新的参数

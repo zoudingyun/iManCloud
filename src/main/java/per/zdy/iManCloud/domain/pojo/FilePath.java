@@ -20,8 +20,33 @@ public class FilePath {
     String fileName;
     String fileRelativePath;
     String parentFileRelativePath;
-    String fileSize;
+    Long fileSize;
+    String displayFileSize;
     String changeTime;
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getDisplayFileSize() {
+        return displayFileSize;
+    }
+
+    public void setDisplayFileSize(String displayFileSize) {
+        this.displayFileSize = displayFileSize;
+    }
+
+    public String getChangeTime() {
+        return changeTime;
+    }
+
+    public void setChangeTime(String changeTime) {
+        this.changeTime = changeTime;
+    }
 
     public String getParentFileRelativePath() {
         return parentFileRelativePath;

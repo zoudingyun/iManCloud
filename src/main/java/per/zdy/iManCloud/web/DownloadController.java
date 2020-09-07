@@ -1,6 +1,7 @@
 package per.zdy.iManCloud.web;
 
 import cn.hutool.core.io.FileUtil;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,12 +22,13 @@ import static per.zdy.iManCloud.share.PublicValue.FILE_PATH;
 @Controller
 public class DownloadController {
 
-    @GetMapping("/downloadCacheFile/{fileName:.*}")
-    public ResponseEntity<FileSystemResource> downloadCacheFile(@PathVariable("fileName") String fileName) {
+    @GetMapping("/downloadCacheFile")
+    public ResponseEntity<FileSystemResource> downloadCacheFile(@RequestParam("path") String path, @RequestParam("fileName") String fileName) {
         try {
+            path = path.replaceAll("-","/");
             // 获取文件名称，中文可能被URL编码
-            fileName = URLDecoder.decode(fileName, "UTF-8");
-            File directory = FileUtil.touch(FILE_PATH +"/admin/"+ fileName);
+            String rfileName = URLDecoder.decode(path+fileName, "UTF-8");
+            File directory = FileUtil.touch(FILE_PATH +"/"+SecurityUtils.getSubject().getPrincipal().toString()+"/"+ rfileName);
 
             // 获取本地文件系统中的文件资源
             FileSystemResource resource = new FileSystemResource(directory.getAbsolutePath());
