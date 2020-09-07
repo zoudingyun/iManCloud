@@ -15,23 +15,28 @@ import java.util.List;
 import static cn.hutool.core.io.FileUtil.*;
 import static per.zdy.iManCloud.share.PublicValue.*;
 
+/**
+ * @author zdy
+ * */
 @Service
 public class FileServiceImpl implements FileService {
 
     @Autowired
     FileDao fileDao;
 
-
+    @Override
     public void queryChildPaths(String path){
         File[] a = ls(path);
         a[0].isDirectory();
         int aa = 0;
     }
 
+    @Override
     public boolean pathIsExist(String path){
         return isDirectory(Paths.get(path),false);
     }
 
+    @Override
     public List<FilePath> queryUserFilePathFromDbRecord(String userName, String parentPath){
         if (null == parentPath){
             parentPath = FILE_PATH+"/"+userName+"/";
@@ -42,10 +47,12 @@ public class FileServiceImpl implements FileService {
         return filePaths;
     }
 
+    @Override
     public List<FilePath> queryUserFilePathFromFileSystemByPath(String userName,String parentPath){
         return null;
     }
 
+    @Override
     public List<FilePath> queryUserFilePathFromFileSystem(String userName){
         String userPath = FILE_PATH+"/"+userName;
         if (!FileUtil.exist(userPath)||!FileUtil.isDirectory(userPath)){
@@ -54,6 +61,7 @@ public class FileServiceImpl implements FileService {
         return getPath(userPath,userName);
     }
 
+    @Override
     public void insertUserFilePath(String userName){
         List<FilePath> filePathList = queryUserFilePathFromFileSystem(userName);
         for (FilePath filePath:filePathList){
@@ -61,6 +69,7 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    @Override
     public void updateUserFilePath(String userName,FilePath nowPath){
 
         List<FilePath> filePaths = fileDao.queryUserFilePath(userName,nowPath.getFilePath());

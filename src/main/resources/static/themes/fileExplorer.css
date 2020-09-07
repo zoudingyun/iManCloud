@@ -24,7 +24,7 @@
     -moz-transition:color 0.2s; /* Firefox 4 */
     -webkit-transition:color 0.2s; /* Safari and Chrome */
     -o-transition:color 0.2s; /* Opera */
-    cursor:pointer;
+    /*cursor:pointer;*/
 }
 .fileName:hover
 {
