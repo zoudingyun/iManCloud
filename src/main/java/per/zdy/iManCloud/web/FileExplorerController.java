@@ -19,12 +19,14 @@ public class FileExplorerController {
 
     /**
      * 查询当前用户的文件列表（指定目录）
-     * @param filePath:可传入filePath指定查询的文件夹
+     * @param filePathStr:可传入filePath指定查询的文件夹
      * */
-    @PostMapping("/queryUserPath")
+    @GetMapping("/queryUserPath")
     @CrossOrigin
-    public Result queryUserPath(@RequestBody FilePath filePath) {
+    public Result queryUserPath(@RequestParam("filePath")String filePathStr) {
         try{
+            FilePath filePath = new FilePath();
+            filePath.setFilePath("./"+filePathStr.replaceAll("-","/"));
             return ResultGenerator.genSuccessResult(fileService.queryUserFilePathFromDbRecord(SecurityUtils.getSubject().getPrincipal().toString(),filePath.getFilePath()));
         }catch (Exception ex){
             return ResultGenerator.genFailResult(ex.getMessage());

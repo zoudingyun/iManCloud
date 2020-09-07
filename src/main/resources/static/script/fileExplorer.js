@@ -8,6 +8,13 @@ $(function () {
     // $.addtabs.set({iframe:false})
     console.log('欢迎使用LanaiUI')
 })
+
+window.onpopstate = function(event){
+    if(event.state){
+        iniExplorer(event.state.response,event.state.path);
+    }
+};
+
 var table;
 layui.use('table', function(){
     table = layui.table;
@@ -88,75 +95,17 @@ function downFile(fileurl) {
 
 function f(path) {
     $.ajax( {
-            type: "POST",
+            type: "GET",
             contentType: "application/json",
-            url:"/fileExplorerController/queryUserPath",
-            data: JSON.stringify(getQueryCondition(path)),
+            url:"/fileExplorerController/queryUserPath?filePath="+path.replace("./","").replace("/","-"),
             success:function(response) {
                if (response.code == 200){
-                    var dat = response.data;
-                    var data =new Array();
-                   pwd = path.split("/");
-                   upPath = "";
-                   for (var i=0;i<pwd.length-2;i++){
-                       upPath+=pwd[i]+"/";
-                   }
-                    if (path=="./"){
-                        $("#return").hide();
-                        $('#homeTag').show();
-                    }else {
-                        $("#return").show();
-                        $('#homeTag').hide();
-                    }
-                    pwdStr='';
-                    var pStr = '';
-                    var urlStr='| ';
-                    for (var i=0;i<pwd.length-1;i++){
-                        if (i<pwd.length-2){
-                            var pName = '';
-                            if (pwd[i]=='.'){
-                                pName = '全部文件';
-                            }else {
-                                pName = pwd[i];
-                            }
-                            pStr+=pwd[i]+'/';
-                            urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pStr+"\")'>"+pName+"</span><span> > </span>";
-                        }else {
-                            urlStr+="<span>"+pwd[i]+"</span>";
-                        }
-                        pwdStr+=pwd[i]+'/';
-                    }
-                    if (pwd.length>2){
-                        $("#pathUrl").html(urlStr);
-                    }else {
-                        $("#pathUrl").html('');
-                    }
-                    for (var i = 0;i<dat.length;i++){
-                        var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
-                        var file = dat[i].fileRelativePath.split('./');
-                        var serverPath = dat[i].parentFileRelativePath.replace("./","").replace("/","-");
-                        var fileName = dat[i].fileName;
-                        if (dat[i].fileType.indexOf('folder')==0){
-                            fileName = "<div class='fileName' onclick='f(\""+dat[i].fileRelativePath+"/\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
-                        }else if (dat[i].fileType.indexOf('mov')==0) {
-                            fileName = "<div class='fileName' onclick='alert(\"下载\")'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
-                        }else {
-                            fileName = "<div class='fileName')'><i class='fa  fa-file-o'></i> <a href=\"./downloadCacheFile?path="+serverPath+"&fileName="+fileName+"\" download=\""+fileName+"\">"+fileName+"</a></div>";
-                        }
-                        params.fileName = fileName;
-                        params.fileSize = dat[i].displayFileSize;
-                        params.changeTime = dat[i].changeTime;
-                        params.path = dat[i].filePath;
-                        params.fileType = dat[i].fileType;
-                        data.push(params);
-                    }
+                   window.history.pushState({"response":response,"path":path},null,"");
 
-                   table.reload('fileExplorer', {
-                       data:data
-                        //,height: 300
-                    });
+                   iniExplorer(response,path);
+
                } else {
-                   console(response)
+                   console.log(response)
                }
             },
             dataSrc:function(data)
@@ -165,6 +114,74 @@ function f(path) {
             }
         }
     );
+}
+
+function iniExplorer(response,path) {
+    try {
+        var dat = response.data;
+        var data =new Array();
+        pwd = path.split("/");
+        upPath = "";
+        for (var i=0;i<pwd.length-2;i++){
+            upPath+=pwd[i]+"/";
+        }
+        if (path=="./"){
+            $("#return").hide();
+            $('#homeTag').show();
+        }else {
+            $("#return").show();
+            $('#homeTag').hide();
+        }
+        pwdStr='';
+        var pStr = '';
+        var urlStr='| ';
+        for (var i=0;i<pwd.length-1;i++){
+            if (i<pwd.length-2){
+                var pName = '';
+                if (pwd[i]=='.'){
+                    pName = '全部文件';
+                }else {
+                    pName = pwd[i];
+                }
+                pStr+=pwd[i]+'/';
+                urlStr+="<span style='color: #00a2d4;cursor:pointer;' onclick='f(\""+pStr+"\")'>"+pName+"</span><span> > </span>";
+            }else {
+                urlStr+="<span>"+pwd[i]+"</span>";
+            }
+            pwdStr+=pwd[i]+'/';
+        }
+        if (pwd.length>2){
+            $("#pathUrl").html(urlStr);
+        }else {
+            $("#pathUrl").html('');
+        }
+        for (var i = 0;i<dat.length;i++){
+            var params={"fileName":"","fileSize":"","changeTime":"","path":"","fileType":""};
+            var file = dat[i].fileRelativePath.split('./');
+            var serverPath = dat[i].parentFileRelativePath.replace("./","").replace("/","-");
+            var fileName = dat[i].fileName;
+            if (dat[i].fileType.indexOf('folder')==0){
+                fileName = "<div class='fileName' onclick='f(\""+dat[i].fileRelativePath+"/\")'><i class='fa fa-folder'></i> "+fileName+"</div>";
+            }else if (dat[i].fileType.indexOf('mov')==0) {
+                fileName = "<div class='fileName' onclick='alert(\"下载\")'><i class='fa fa-file-video-o'></i> "+fileName+"</div>";
+            }else {
+                fileName = "<div class='fileName')'><i class='fa  fa-file-o'></i> <a href=\"./downloadCacheFile?path="+serverPath+"&fileName="+fileName+"\" download=\""+fileName+"\">"+fileName+"</a></div>";
+            }
+            params.fileName = fileName;
+            params.fileSize = dat[i].displayFileSize;
+            params.changeTime = dat[i].changeTime;
+            params.path = dat[i].filePath;
+            params.fileType = dat[i].fileType;
+            data.push(params);
+        }
+
+        table.reload('fileExplorer', {
+            data:data
+            //,height: 300
+        });
+    }catch (e) {
+        console.log("目录不存在或其它异常")
+    }
 }
 
 //查询参数封装
