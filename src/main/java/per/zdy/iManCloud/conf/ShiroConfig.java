@@ -61,6 +61,8 @@ public class ShiroConfig {
         map.put("/start", "anon");
         map.put("/register", "anon");
         map.put("/h2-console/**", "anon");
+        // 分享页面放行
+        map.put("/s","anon");
         // 静态资源放行
         map.put("*.js", "anon");
         map.put("*.css", "anon");
