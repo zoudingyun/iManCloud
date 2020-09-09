@@ -7,7 +7,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,7 @@ public class LoginController {
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
         //shiro 24小时后失效
         SecurityUtils.getSubject().getSession().setTimeout(24*3600*1000);
+
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");
@@ -46,10 +49,13 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
+        /*UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
                 user.getUserName(),
                 user.getPassword()
-        );
+        );*/
+        UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(
+                user.getUserName(),user.getPassword()
+                ,true);
         try {
             //进行验证，这里可以捕获异常，然后返回对应信息
             subject.login(usernamePasswordToken);

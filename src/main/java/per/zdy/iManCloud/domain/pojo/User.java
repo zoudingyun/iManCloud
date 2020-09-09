@@ -12,11 +12,20 @@ public class User {
     private String userName;
     private String password;
     private String nickname;
+    private String token;
 
     /**
      * 用户对应的角色集合
      */
     private Set<Role> roles;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getId() {
         return id;
