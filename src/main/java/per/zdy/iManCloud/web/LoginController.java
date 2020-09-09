@@ -49,13 +49,19 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
-        /*UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
-                user.getUserName(),
-                user.getPassword()
-        );*/
-        UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(
-                user.getUserName(),user.getPassword()
-                ,true);
+        UsernamePasswordToken usernamePasswordToken = null;
+        /*用户是否选择记住我*/
+        if (user.getRememberMe()){
+            usernamePasswordToken=new UsernamePasswordToken(
+                    user.getUserName(),user.getPassword()
+                    ,true);
+        }else {
+            usernamePasswordToken = new UsernamePasswordToken(
+                    user.getUserName(),
+                    user.getPassword()
+            );
+        }
+
         try {
             //进行验证，这里可以捕获异常，然后返回对应信息
             subject.login(usernamePasswordToken);

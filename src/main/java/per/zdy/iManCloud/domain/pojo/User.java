@@ -12,19 +12,19 @@ public class User {
     private String userName;
     private String password;
     private String nickname;
-    private String token;
+    private Boolean rememberMe = false;
 
     /**
      * 用户对应的角色集合
      */
     private Set<Role> roles;
 
-    public String getToken() {
-        return token;
+    public Boolean getRememberMe() {
+        return rememberMe;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 
     public String getId() {
