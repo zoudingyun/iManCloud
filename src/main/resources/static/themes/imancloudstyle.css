@@ -1,0 +1,65 @@
+html {
+    /* 定义变量 */
+    --bgColor: #ff5353/*#ff5353*/;
+
+    /* rgba的四个值分别为：红(R)、绿(G)、蓝(B)、透明度(A) */
+    --whiteShadow: -15px -15px 25px rgba(255, 117, 117, .5);
+    --blackShadow: 15px 15px 25px rgba(110, 40, 40, .2);
+}
+
+body, .main::before{
+    background: url("../../dist/img/codeBackground.jpg") 0 / cover fixed;
+}
+
+/* 设置一些页面的布局样式 */
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bgColor);
+    background-size: cover;
+    height: 100%;
+    margin: 0px;
+}
+
+.main{
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    width: 500px;
+    height: 250px;
+    line-height: 2;
+    margin: auto;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, .3);
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, .3);
+    overflow: hidden;
+
+}
+
+.main::before{
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    filter: blur(20px);
+    z-index: -1;
+    margin: -30px;
+}
+
+.insideDiv{
+    width: 416px;
+    height: 216px;
+    border-radius: 15px;
+    box-shadow:  0px 0px 33px #ffffff;
+}
+.headImg{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
