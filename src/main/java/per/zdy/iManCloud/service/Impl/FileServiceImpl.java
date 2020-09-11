@@ -88,6 +88,23 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    @Override
+    public int sharedFileNeedPw(String shareUrl){
+        List<String> pws = fileDao.querySharedFilePw(shareUrl);
+        if (pws.size()==1){
+            /*不需要提取码*/
+            if (null==pws.get(0)||"".equals(pws.get(0))){
+                return 0;
+            }
+            /*需要提取码*/
+            return 1;
+        }else {
+            /*不存在文件*/
+            return -1;
+        }
+    }
+
+
     List<FilePath> getPath(String path,String username){
         File[] files = ls(path);
         List<FilePath> filePathList = new ArrayList<>();

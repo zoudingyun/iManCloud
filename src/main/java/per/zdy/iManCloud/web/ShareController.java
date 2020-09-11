@@ -42,9 +42,20 @@ public class ShareController {
      * 文件访问连接
      * */
     @GetMapping("/s")
-    public ModelAndView register(){
+    public ModelAndView register(String f){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/pages/page/share.html");
+        int needPw = fileService.sharedFileNeedPw(f);
+        if (needPw==1){
+            /*需要提取码*/
+            mv.setViewName("/pages/page/share.html");
+        }else if (needPw==0){
+            /*不需要提取码*/
+            mv.setViewName("/pages/page/login.html");
+        }else if (needPw==-1){
+            /*文件不存在*/
+            mv.setViewName("/pages/page/404.html");
+        }
+
         return mv;
     }
 

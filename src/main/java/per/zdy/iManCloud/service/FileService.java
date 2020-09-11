@@ -59,4 +59,12 @@ public interface FileService {
     void updateUserFilePath(String userName,FilePath nowPath);
 
 
+    /**
+     * 检查分享文件是否需要提取码
+     * @param shareUrl 分享文件的url
+     * @return 是否需要提取码 0 不需要 1 需要 -1不存在文件
+     * * */
+    int sharedFileNeedPw(String shareUrl);
+
+
 }

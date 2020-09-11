@@ -22,4 +22,11 @@ public interface FileDao {
 
     public void deleteUserFilePath(FilePath filePath);
 
+    /**
+     * 查询分享文件、文件夹的提取码
+     * @param shareUrl 分享地址
+     * @return 分享文件的提取码
+     * */
+    public List<String> querySharedFilePw(@Param("shareUrl") String shareUrl);
+
 }
