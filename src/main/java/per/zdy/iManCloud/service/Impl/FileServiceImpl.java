@@ -5,16 +5,18 @@ import cn.hutool.core.io.FileUtil;
 import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import per.zdy.iManCloud.bean.Permissions;
+import per.zdy.iManCloud.bean.Role;
 import per.zdy.iManCloud.domain.dao.FileDao;
 import per.zdy.iManCloud.domain.pojo.FilePath;
+import per.zdy.iManCloud.domain.pojo.User;
+import per.zdy.iManCloud.domain.pojo.UserInfo;
 import per.zdy.iManCloud.service.FileService;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import static cn.hutool.core.io.FileUtil.*;
 import static per.zdy.iManCloud.share.PublicValue.*;
@@ -102,6 +104,27 @@ public class FileServiceImpl implements FileService {
             /*不存在文件*/
             return -1;
         }
+    }
+
+    @Override
+    public User sharedFileUser(String shareUrl){
+        List<String> pws = fileDao.querySharedFilePw(shareUrl);
+        String pwd;
+        if (pws.size()==1){
+            pwd = pws.get(0);
+
+            User user = new User();
+
+            user.setUserName(shareUrl);
+            user.setPassword(pwd);
+
+            return user;
+
+        }else {
+            return null;
+        }
+
+
     }
 
 

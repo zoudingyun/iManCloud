@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%;margin: 0px;">
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%;margin: 0px;">
 	<head>
 		<meta charset="UTF-8">
 		<title>文件分享页</title>
@@ -14,9 +14,9 @@
 				<span><img src="dist/img/sl.jpg" class="headImg" alt="User Image"></span><span><b>XXXX</b></span><span> 给您分享了文件</span>
 			</div>
 		</div>
-		<form th:action="@{/login}" method="post">
+		<form th:action="@{/checkFileCode}" method="post">
 			<div class="form-group has-feedback" hidden="hidden">
-				<input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话">
+				<input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话" th:value="${fileCode}">
 				<span class="fa fa-envelope form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback" style="width: 100%;padding-left: 25%;padding-right: 5%;margin-top: 50px">
@@ -29,4 +29,9 @@
 	</div>
 	<div id="footer" style="margin-bottom: 0px">Powered by iManCloud</div>
 	</body>
+	<script src="../../dist/js/jquery.min.js"></script>
+	<script src="../../dist/js/lanai-ui.min.js"></script>
+	<script>
+		
+	</script>
 </html>

@@ -41,6 +41,7 @@ public class LoginController {
         //shiro 24小时后失效
         SecurityUtils.getSubject().getSession().setTimeout(24*3600*1000);
 
+        user.setUserName(user.getUserName()+"$"+"login");
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");

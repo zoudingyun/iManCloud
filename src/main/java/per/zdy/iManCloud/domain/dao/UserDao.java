@@ -12,13 +12,12 @@ import per.zdy.iManCloud.domain.pojo.UserInfo;
 import java.util.List;
 
 /**
- * @Auther: xf
- * @Date: 2018/12/2 21:45
- * @Description:
+ * 通过@SqlResource 注解来指定Mapper对应的sql文件 user.md 文件
+ * @sqlResource("ron.user")  多级目录
+ * @author zdy
+ * @date: 2018/12/2 21:45
  * BaseMapper包含了内置的常用 CRUD
  */
-// 通过@SqlResource 注解来指定Mapper对应的sql文件 user.md 文件
-// @SqlResource("ron.user")  多级目录
 @SqlResource("user")
 @Repository
 public interface UserDao extends BaseMapper<User> {

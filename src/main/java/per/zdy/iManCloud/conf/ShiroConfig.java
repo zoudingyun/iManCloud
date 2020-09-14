@@ -57,6 +57,7 @@ public class ShiroConfig {
         map.put("/logout", "logout");
         //对所有用户认证 其他资源都需要认证  authc 表示需要认证才能进行访问 user表示配置记住我或认证通过可以访问的地址
         map.put("/**", "user");
+        map.put("/checkFileCode","anon");
         map.put("/login", "anon");
         map.put("/start", "anon");
         map.put("/register", "anon");

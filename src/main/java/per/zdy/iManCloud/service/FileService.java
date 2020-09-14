@@ -1,6 +1,7 @@
 package per.zdy.iManCloud.service;
 
 import per.zdy.iManCloud.domain.pojo.FilePath;
+import per.zdy.iManCloud.domain.pojo.User;
 
 import java.util.List;
 
@@ -65,6 +66,13 @@ public interface FileService {
      * @return 是否需要提取码 0 不需要 1 需要 -1不存在文件
      * * */
     int sharedFileNeedPw(String shareUrl);
+
+    /**
+     * 查询提取码
+     * @param shareUrl 分享文件的url
+     * @return 文件分享提取码
+     * * */
+    User sharedFileUser(String shareUrl);
 
 
 }
