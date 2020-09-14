@@ -51,6 +51,12 @@ body {
     margin: -30px;
 }
 
+.shareFileExplorer{
+    width: calc(100% - 50px);
+    height: calc(100% - 200px);
+    margin-bottom: 50px;
+}
+
 .insideDiv{
     width: 416px;
     height: 216px;

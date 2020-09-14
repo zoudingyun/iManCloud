@@ -68,11 +68,17 @@ public interface FileService {
     int sharedFileNeedPw(String shareUrl);
 
     /**
-     * 查询提取码
+     * 查询提取码并得到临时用户
      * @param shareUrl 分享文件的url
-     * @return 文件分享提取码
+     * @return 临时用户
      * * */
     User sharedFileUser(String shareUrl);
 
+    /**
+     * 查询提取码
+     * @param shareUrl 分享文件的url
+     * @return
+     * * */
+    Boolean checkFileCode(String shareUrl,String code);
 
 }

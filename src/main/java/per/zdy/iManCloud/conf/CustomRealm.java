@@ -8,12 +8,16 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.hibernate.collection.internal.PersistentSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import per.zdy.iManCloud.bean.Permissions;
 import per.zdy.iManCloud.bean.Role;
 import per.zdy.iManCloud.domain.pojo.User;
 import per.zdy.iManCloud.service.FileService;
 import per.zdy.iManCloud.service.LoginService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 自定义shiro验证方式

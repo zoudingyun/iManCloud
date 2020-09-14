@@ -8,13 +8,13 @@
 	</head>
 	<body style="">
 	<nav class="main" style="width: 100%;height: 50px;margin-top: 0px;border-radius: 0px;" ></nav>
-	<div class="main" >
+	<div class="main" style="display:none" id="checkFileCode">
 		<div style="width: 100%;height: 50px;background: #6a7d8a;color: #F2F2F2;font-family: 微软雅黑;padding-top: 10px;margin-top: 20px">
 			<div style="margin-left: 30px;">
 				<span><img src="dist/img/sl.jpg" class="headImg" alt="User Image"></span><span><b>XXXX</b></span><span> 给您分享了文件</span>
 			</div>
 		</div>
-		<form th:action="@{/checkFileCode}" method="post">
+		<form th:action="@{/checkFileCode}" method="post" id="noUser" hidden="hidden">
 			<div class="form-group has-feedback" hidden="hidden">
 				<input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话" th:value="${fileCode}">
 				<span class="fa fa-envelope form-control-feedback"></span>
@@ -25,13 +25,59 @@
 			</div>
 
 		</form>
+		<div id="userReady" hidden="hidden">
+			<div class="form-group has-feedback" hidden="hidden">
+				<input type="userName" id="shareUrl" name="userName" class="form-control" placeholder="邮箱/用户名/电话" th:value="${fileCode}">
+				<span class="fa fa-envelope form-control-feedback"></span>
+			</div>
+			<div class="form-group has-feedback" style="width: 100%;padding-left: 25%;padding-right: 5%;margin-top: 50px">
+				<input type="userName" id="fileCode" name="password" class="form-control" style="width: 50%;float: left;margin-right: 10px" placeholder="请输入提取码">
+				<button type="submit" onclick="postFileCode()" class="btn btn-primary btn-block btn-flat" style="width: 20%;float: left">提 取</button>
+			</div>
+		</div>
 
+	</div>
+	<div class="main shareFileExplorer" id="fileExplorer" style="display:none">
 	</div>
 	<div id="footer" style="margin-bottom: 0px">Powered by iManCloud</div>
 	</body>
 	<script src="../../dist/js/jquery.min.js"></script>
 	<script src="../../dist/js/lanai-ui.min.js"></script>
-	<script>
-		
+	<script th:inline="javascript">
+		var needCode = [[${needCode}]];
+		if (needCode){
+			$("#checkFileCode").show();
+		}else {
+			$("#fileExplorer").show();
+		}
+
+		var userReady = [[${userReady}]];
+		if (userReady){
+			$("#userReady").show();
+		}else {
+			$("#noUser").show();
+		}
+
+		function postFileCode() {
+			$.ajax({
+				url: "http://127.0.0.1:8080/share/checkFileCode",
+				type: "post",
+				dataType: "json",
+				contentType: "application/json;charset=utf-8",
+				async: true,
+				crossDomain: true,
+				data: JSON.stringify({
+					userName: $('#shareUrl').val(),
+					password: $('#fileCode').val()
+				}),
+				success: function(data) {
+					if (data.code == 200) {
+						window.location.reload();
+					} else {
+						alert(data.message)
+					}
+				}
+			});
+		}
 	</script>
 </html>

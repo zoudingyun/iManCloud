@@ -46,6 +46,9 @@ public class PublicValue {
     /**无秒时间格式*/
     public static String timeFormatNos = "yyyy-MM-dd HH:mm";
 
+    /**已登录用户得到的分享文件*/
+    public static HashMap<String,Long> userShareFileMap = new HashMap<>();
+
     /**
      * 刷新系统配置缓存
      * @param serverConfInitialize:需要更新的参数

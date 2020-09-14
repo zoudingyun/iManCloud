@@ -99,6 +99,10 @@ public class AdminController {
     public ModelAndView index() {
         User user = loginService.getUserByName(SecurityUtils.getSubject().getPrincipal().toString());
         ModelAndView mv = new ModelAndView();
+        if (null == user){
+            mv.setViewName("/pages/page/login.html");
+            return mv;
+        }
         mv.addObject("userName",user.getUserName());
         mv.addObject("nickname",user.getNickname());
         mv.setViewName("/index.html");

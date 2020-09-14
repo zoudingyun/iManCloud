@@ -107,6 +107,21 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public Boolean checkFileCode(String shareUrl,String code){
+        List<String> pws = fileDao.querySharedFilePw(shareUrl);
+        String pwd;
+        if (pws.size()==1){
+           if (pws.get(0).equals(code)){
+               return true;
+           }else {
+               return false;
+           }
+        }else {
+            return false;
+        }
+    }
+
+    @Override
     public User sharedFileUser(String shareUrl){
         List<String> pws = fileDao.querySharedFilePw(shareUrl);
         String pwd;
