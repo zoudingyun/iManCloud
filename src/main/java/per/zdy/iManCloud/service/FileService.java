@@ -1,6 +1,7 @@
 package per.zdy.iManCloud.service;
 
 import per.zdy.iManCloud.domain.pojo.FilePath;
+import per.zdy.iManCloud.domain.pojo.ShareFileList;
 import per.zdy.iManCloud.domain.pojo.User;
 
 import java.util.List;
@@ -80,5 +81,12 @@ public interface FileService {
      * @return
      * * */
     Boolean checkFileCode(String shareUrl,String code);
+
+    /**
+     * 查询分享文件信息
+     * @param shareUrl 分享文件的url
+     * @return
+     * * */
+    List<ShareFileList> getShareFileInfo(String shareUrl);
 
 }

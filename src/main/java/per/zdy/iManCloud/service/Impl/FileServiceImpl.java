@@ -9,6 +9,7 @@ import per.zdy.iManCloud.bean.Permissions;
 import per.zdy.iManCloud.bean.Role;
 import per.zdy.iManCloud.domain.dao.FileDao;
 import per.zdy.iManCloud.domain.pojo.FilePath;
+import per.zdy.iManCloud.domain.pojo.ShareFileList;
 import per.zdy.iManCloud.domain.pojo.User;
 import per.zdy.iManCloud.domain.pojo.UserInfo;
 import per.zdy.iManCloud.service.FileService;
@@ -138,8 +139,11 @@ public class FileServiceImpl implements FileService {
         }else {
             return null;
         }
+    }
 
-
+    @Override
+    public List<ShareFileList> getShareFileInfo(String shareUrl){
+        return fileDao.querySharedFileInfo(shareUrl);
     }
 
 

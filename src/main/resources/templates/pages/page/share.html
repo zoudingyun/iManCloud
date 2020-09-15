@@ -38,12 +38,24 @@
 
 	</div>
 	<div class="main shareFileExplorer" id="fileExplorer" style="display:none">
+		<div class="shareFile" style="width: 300px;font-size: 30px;display:none" id="file404" >
+			<img src="dist/img/file_404.png" style="width: 100%">
+			<br>
+			<p style="margin: 30px">分享的文件不存在</p>
+		</div>
+		<div class="shareFile" style="width: 300px;font-size: 10px;display:none" id="sharefile" >
+			<img src="dist/img/file.png" style="width: 50px">
+			<span id="fileName" style="font-size: 20px"></span>
+			<br>
+			<button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件</button>
+		</div>
 	</div>
 	<div id="footer" style="margin-bottom: 0px">Powered by iManCloud</div>
 	</body>
 	<script src="../../dist/js/jquery.min.js"></script>
 	<script src="../../dist/js/lanai-ui.min.js"></script>
 	<script th:inline="javascript">
+		var fileShareUrl = [[${fileShareUrl}]];
 		var needCode = [[${needCode}]];
 		if (needCode){
 			$("#checkFileCode").show();
@@ -56,6 +68,28 @@
 			$("#userReady").show();
 		}else {
 			$("#noUser").show();
+		}
+
+		var filestate = [[${fileState}]];
+		if (filestate==-1){
+			$("#file404").show();
+		}else {
+			$.ajax({
+				url: "http://127.0.0.1:8080/share/getShareFileInfo?fileUrl="+fileShareUrl,
+				type: "post",
+				dataType: "json",
+				contentType: "application/json;charset=utf-8",
+				async: true,
+				crossDomain: true,
+				success: function(data) {
+					console.log(data);
+					var fileInfo = data.data;
+					if (fileInfo.shareType!='folder'){
+						document.getElementById("fileName").innerHTML = fileInfo.fileName;
+						$("#sharefile").show();
+					}
+				}
+			});
 		}
 
 		function postFileCode() {

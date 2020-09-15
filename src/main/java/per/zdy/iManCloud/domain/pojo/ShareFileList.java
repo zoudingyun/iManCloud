@@ -24,6 +24,9 @@ public class ShareFileList {
     /**文件相对路径*/
     String filePath;
 
+    /**文件相对路径*/
+    String fileName;
+
     /**分享人*/
     String userName;
 
@@ -35,6 +38,25 @@ public class ShareFileList {
 
     /**提取码*/
     String filePassWord;
+
+    /**文件大小*/
+    Long fileSize;
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getShareUrl() {
         return shareUrl;

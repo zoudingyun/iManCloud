@@ -77,3 +77,13 @@ body {
     clear:both;
     color: #BFC5C5;
 }
+
+.shareFile{
+    position:absolute;
+    /*top 50%*/
+    top: 50%;
+    /*left 50%*/
+    left: 50%;
+    /*css3   transform 实现*/
+    transform: translate(-50%, -50%);
+}
