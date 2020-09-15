@@ -47,7 +47,12 @@
 			<img src="dist/img/file.png" style="width: 50px">
 			<span id="fileName" style="font-size: 20px"></span>
 			<br>
-			<button class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;margin-right: -1px!important;" data-type="getCheckData"><i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件</button>
+			<button onclick="downloadF()" class="layui-btn layui-btn-primary layui-btn-sm" style="width: 100px;margin-right: -1px!important;" data-type="getCheckData">
+
+			</button>
+			<a id="my_a" href="./sharedownload?isFolder=false&furl=111&fp=&fileName=CloudLink-windows.exe" download="CloudLink-windows.exe">
+				<i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件
+			</a>
 		</div>
 	</div>
 	<div id="footer" style="margin-bottom: 0px">Powered by iManCloud</div>
@@ -111,6 +116,12 @@
 						alert(data.message)
 					}
 				}
+			});
+		}
+
+		function downloadF() {
+			$("#my_a").click(function () {
+				//do something
 			});
 		}
 	</script>
