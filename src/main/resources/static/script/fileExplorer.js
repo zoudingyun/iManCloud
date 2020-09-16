@@ -97,7 +97,7 @@ function f(path) {
     $.ajax( {
             type: "GET",
             contentType: "application/json",
-            url:"/fileExplorerController/queryUserPath?filePath="+path.replace("./","").replace("/","-"),
+            url:"./fileExplorerController/queryUserPath?filePath="+path.replace("./","").replace("/","-"),
             success:function(response) {
                if (response.code == 200){
                    window.history.pushState({"response":response,"path":path},null,"");

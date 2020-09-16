@@ -59,6 +59,7 @@ public class ShiroConfig {
         map.put("/**", "user");
         map.put("/checkFileCode","anon");
         map.put("/login", "anon");
+        map.put("/pages/page/login", "anon");
         map.put("/start", "anon");
         map.put("/register", "anon");
         map.put("/h2-console/**", "anon");
@@ -73,7 +74,7 @@ public class ShiroConfig {
         map.put("/themes/**", "anon");
 
         //登录
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/pages/page/login");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/");
         //错误页面，认证不通过跳转

@@ -96,7 +96,7 @@ public class ShareController {
             mv.addObject("needCode",needCode);
         }
 
-        mv.setViewName("/pages/page/share.html");
+        mv.setViewName("/share.html");
         mv.addObject("fileState",needPw);
         mv.addObject("fileShareUrl",f);
         mv.addObject("fileCode",f);

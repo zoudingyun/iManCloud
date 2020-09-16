@@ -36,7 +36,7 @@ public class LoginController {
     @Autowired
     FileService fileService;
 
-    @PostMapping("/login")
+    @PostMapping("/pages/page/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
         //shiro 24小时后失效
         SecurityUtils.getSubject().getSession().setTimeout(24*3600*1000);
@@ -83,12 +83,12 @@ public class LoginController {
             mv.setViewName("/pages/page/500.html");
             return mv;
         }
-        mv.addObject("url","/");
+        mv.addObject("url","../../");
         mv.setViewName("/pages/page/goto.html");
         return mv;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/pages/page/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/pages/page/login.html");
