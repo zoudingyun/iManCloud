@@ -15,6 +15,7 @@ public class FilePath {
     @Id
     String filePath;
     String userName;
+    /**文件类型 ：folder 文件夹*/
     String fileType;
     String parentPath;
     String fileName;

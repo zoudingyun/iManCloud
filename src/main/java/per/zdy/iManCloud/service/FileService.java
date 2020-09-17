@@ -1,6 +1,8 @@
 package per.zdy.iManCloud.service;
 
 import per.zdy.iManCloud.domain.pojo.FilePath;
+import per.zdy.iManCloud.domain.pojo.ShareFileList;
+import per.zdy.iManCloud.domain.pojo.User;
 
 import java.util.List;
 
@@ -58,5 +60,33 @@ public interface FileService {
      * */
     void updateUserFilePath(String userName,FilePath nowPath);
 
+
+    /**
+     * 检查分享文件是否需要提取码
+     * @param shareUrl 分享文件的url
+     * @return 是否需要提取码 0 不需要 1 需要 -1不存在文件
+     * * */
+    int sharedFileNeedPw(String shareUrl);
+
+    /**
+     * 查询提取码并得到临时用户
+     * @param shareUrl 分享文件的url
+     * @return 临时用户
+     * * */
+    User sharedFileUser(String shareUrl);
+
+    /**
+     * 查询提取码
+     * @param shareUrl 分享文件的url
+     * @return
+     * * */
+    Boolean checkFileCode(String shareUrl,String code);
+
+    /**
+     * 查询分享文件信息
+     * @param shareUrl 分享文件的url
+     * @return
+     * * */
+    List<ShareFileList> getShareFileInfo(String shareUrl);
 
 }

@@ -97,7 +97,7 @@ function f(path) {
     $.ajax( {
             type: "GET",
             contentType: "application/json",
-            url:"/fileExplorerController/queryUserPath?filePath="+path.replace("./","").replace("/","-"),
+            url:"./fileExplorerController/queryUserPath?filePath="+path.replace("./","").replace("/","-"),
             success:function(response) {
                if (response.code == 200){
                    window.history.pushState({"response":response,"path":path},null,"");
@@ -202,7 +202,7 @@ function upload() {
         uploader = WebUploader.create({
 
             // 文件接收服务端。
-            server: '/upload',
+            server: './upload',
 
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -273,7 +273,7 @@ function upload() {
             }
             clearInterval(timer);
             $('#' + file.id).find('p.state').text('已上传');
-            $.get("/merge", {"guid": successDuid}, function (data, status) {
+            $.get("./merge", {"guid": successDuid}, function (data, status) {
                 layer.msg("合并完成");
             });
 

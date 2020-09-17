@@ -57,7 +57,9 @@ public class ShiroConfig {
         map.put("/logout", "logout");
         //对所有用户认证 其他资源都需要认证  authc 表示需要认证才能进行访问 user表示配置记住我或认证通过可以访问的地址
         map.put("/**", "user");
+        map.put("/checkFileCode","anon");
         map.put("/login", "anon");
+        map.put("/pages/page/login", "anon");
         map.put("/start", "anon");
         map.put("/register", "anon");
         map.put("/h2-console/**", "anon");
@@ -72,7 +74,7 @@ public class ShiroConfig {
         map.put("/themes/**", "anon");
 
         //登录
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/pages/page/login");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/");
         //错误页面，认证不通过跳转
