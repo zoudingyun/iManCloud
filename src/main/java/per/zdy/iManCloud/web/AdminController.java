@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,8 +20,7 @@ import per.zdy.iManCloud.service.LoginService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
-import static per.zdy.iManCloud.share.PublicValue.FILE_PATH;
-import static per.zdy.iManCloud.share.PublicValue.guid2path;
+import static per.zdy.iManCloud.share.PublicValue.*;
 
 @Controller
 @ResponseBody
@@ -136,6 +136,8 @@ public class AdminController {
         if (null==guid2path.get(guid)){
             guid2path.put(guid,path);
         }
+        System.out.println(FILE_PATH);
+
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (isMultipart) {
             if (file == null) {

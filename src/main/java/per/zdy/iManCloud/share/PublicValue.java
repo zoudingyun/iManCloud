@@ -1,7 +1,11 @@
 package per.zdy.iManCloud.share;
 
+import cn.hutool.core.io.FileUtil;
+
+import org.springframework.util.ResourceUtils;
 import per.zdy.iManCloud.domain.pojo.ServerConfInitialize;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +27,17 @@ public class PublicValue {
     public static String WEB_NAME = "IManCloud";
 
     /**网盘文件系统路径*/
-    public static String FILE_PATH = "../../../file";
+    public static String SYS_PATH;
+
+    static {
+        try {
+            SYS_PATH = ResourceUtils.getURL("classpath:").getPath();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String FILE_PATH = SYS_PATH+"file";
 
     /*文件类型*/
     /**文件类型标识-文件夹*/
@@ -58,6 +72,13 @@ public class PublicValue {
     public static void renovateSystemConfig(ServerConfInitialize serverConfInitialize){
         WEB_NAME = serverConfInitialize.getWebName();
         FILE_PATH = serverConfInitialize.getFilePath();
+    }
+
+    /**
+     * 获取系统绝对地址
+     * */
+    public static String getSystemPath(){
+        return FileUtil.getAbsolutePath("./");
     }
 
 }
