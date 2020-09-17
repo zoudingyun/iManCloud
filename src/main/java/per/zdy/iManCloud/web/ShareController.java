@@ -96,6 +96,20 @@ public class ShareController {
             mv.addObject("needCode",needCode);
         }
 
+        if(!needCode){
+            List<ShareFileList> shareFileLists = fileService.getShareFileInfo(f);
+            if (shareFileLists.size()==1){
+                mv.addObject("fileName",shareFileLists.get(0).getFileName());
+                if (FILE_TYPE_FOLDER.equals(shareFileLists.get(0).getShareType())){
+                    /*是文件夹*/
+                    mv.addObject("isFolder",true);
+                }else {
+                    mv.addObject("isFolder",false);
+                }
+            }
+
+        }
+
         mv.setViewName("/share.html");
         mv.addObject("fileState",needPw);
         mv.addObject("fileShareUrl",f);
@@ -120,7 +134,7 @@ public class ShareController {
         //添加用户认证信息
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = null;
-        /*用户是否选择记住我*/
+
         usernamePasswordToken = new UsernamePasswordToken(
                 user.getUserName(),
                 user.getPassword()
@@ -147,7 +161,7 @@ public class ShareController {
             return mv;
         }
 
-        mv.addObject("url","/s?f="+fileUrl);
+        mv.addObject("url","./s?f="+fileUrl);
         mv.setViewName("/pages/page/goto.html");
         return mv;
     }
@@ -159,10 +173,13 @@ public class ShareController {
     public ResponseEntity<FileSystemResource> sharedownload(@RequestParam("isFolder") Boolean isFolder ,@RequestParam("furl") String furl,@RequestParam("fp") String fp
             ,@RequestParam("fileName") String fileName) {
 
-        /*是否需要验证提取码*/
+        System.out.println(">>>>>>>>>>>>>分享文件下载");
+
+                /*是否需要验证提取码*/
         Boolean needCode = true;
 
         String user = SecurityUtils.getSubject().getPrincipal().toString();
+        System.out.println(">>>>>>>>>>>>>已登陆");
         /*这部分鉴权查看用户是否有权查询分享文件信息*/
         try {
             if (SecurityUtils.getSubject().hasRole("user") || SecurityUtils.getSubject().hasRole("admin")) {
@@ -185,6 +202,7 @@ public class ShareController {
             }
         }
 
+
         if (!needCode) {
             if (isFolder) {
 
@@ -196,12 +214,15 @@ public class ShareController {
                     try {
                         // 获取文件名称，中文可能被URL编码
                         String rfileName = URLDecoder.decode(shareFileList.getFilePath(), "UTF-8");
+
                         File directory = FileUtil.touch(FILE_PATH + "/" + shareFileList.getUserName() + "/" + rfileName);
+
+
 
                         // 获取本地文件系统中的文件资源
                         FileSystemResource resource = new FileSystemResource(directory.getAbsolutePath());
 
-                        // 解析文件的 mime 类型
+                            // 解析文件的 mime 类型
                         String mediaTypeStr = URLConnection.getFileNameMap().getContentTypeFor(shareFileList.getFileName());
                         // 无法判断MIME类型时，作为流类型
                         mediaTypeStr = (mediaTypeStr == null) ? MediaType.APPLICATION_OCTET_STREAM_VALUE : mediaTypeStr;

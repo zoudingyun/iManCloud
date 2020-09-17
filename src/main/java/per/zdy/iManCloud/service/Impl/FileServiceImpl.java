@@ -53,6 +53,7 @@ public class FileServiceImpl implements FileService {
             parentPath = FILE_PATH+"/"+userName+"/"+queryPathStr[1];
         }
         parentPath = parentPath.replace('\\','/');
+
         List<FilePath> filePaths =getThisPath(parentPath,userName);
         List<FilePath> reList = new ArrayList<>();
         return filePaths;
@@ -185,6 +186,7 @@ public class FileServiceImpl implements FileService {
             f.setUserName(username);
             f.setParentPath(file.getParent().replace('\\','/')+"/");
             f.setFileName(file.getName());
+
             String xdPath = FileUtil.getAbsolutePath(FILE_PATH+"/"+username);
             f.setFileRelativePath(f.getFilePath().replaceAll(xdPath,"."));
             String [] fp = f.getFileRelativePath().split("/");

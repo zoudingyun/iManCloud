@@ -93,7 +93,7 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/pages/page/login.html");
         if (loginService.isNewService()){
-            mv.addObject("url","/start");
+            mv.addObject("url","./start");
             mv.setViewName("/pages/page/goto.html");
         }else {
             mv.setViewName("/pages/page/login.html");
@@ -104,7 +104,7 @@ public class LoginController {
     @GetMapping("/start")
     public ModelAndView start(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/pages/page/start.html");
+        mv.setViewName("/start.html");
         return mv;
     }
     @RequestMapping("/start")
@@ -115,7 +115,7 @@ public class LoginController {
                 try{
                     loginService.systemConf(serverConfInitialize);
                     Boolean a  = loginService.isNewService();
-                    mv.addObject("url","/");
+                    mv.addObject("url","./");
                     mv.setViewName("/pages/page/goto.html");
                     loginService.renovateSystemConf();
                 }catch (Exception ex){

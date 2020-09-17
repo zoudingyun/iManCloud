@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" style="height: 100%;margin: 0px;">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="sharepage" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>文件分享页</title>
 		<link href="./themes/imancloudstyle.css" rel="stylesheet" />
 		<link href="./dist/css/lanai-ui.min.css" rel="stylesheet"/>
@@ -14,7 +16,7 @@
 				<span><img src="./dist/img/sl.jpg" class="headImg" alt="User Image"></span><span><b>XXXX</b></span><span> 给您分享了文件</span>
 			</div>
 		</div>
-		<form th:action="@{/checkFileCode}" method="post" id="noUser" hidden="hidden">
+		<form th:action="@{./checkFileCode}" method="post" id="noUser" hidden="hidden">
 			<div class="form-group has-feedback" hidden="hidden">
 				<input type="userName" name="userName" class="form-control" placeholder="邮箱/用户名/电话" th:value="${fileCode}">
 				<span class="fa fa-envelope form-control-feedback"></span>
@@ -47,12 +49,13 @@
 			<img src="./dist/img/file.png" style="width: 50px">
 			<span id="fileName" style="font-size: 20px"></span>
 			<br>
-			<button class="layui-btn layui-btn-primary layui-btn-sm" style="padding: 0px" >
+			<div class="layui-btn layui-btn-primary layui-btn-sm" style="padding: 0px;background: #F0F0F0;width: 80px" >
 				<a id="my_a" style="display:block;width: 100%;height: 100%;padding-right: 6px;padding-left: 6px;"
-				   href="./sharedownload?isFolder=false&furl=111&fp=&fileName=CloudLink-windows.exe" download="CloudLink-windows.exe">
+				   th:href="@{'./sharedownload?isFolder='+${isFolder}+'&furl='+${fileShareUrl}+'&fp=&fileName='+${fileName}}"
+				   th:download="${fileName}">
 					<i class='fa fa-cloud-download' style="margin-right: 5px"></i>下载文件
 				</a>
-			</button>
+			</div>
 		</div>
 	</div>
 	<div id="footer" style="margin-bottom: 0px">Powered by iManCloud</div>

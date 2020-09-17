@@ -23,11 +23,11 @@ public class PublicValue {
     public static String WEB_NAME = "IManCloud";
 
     /**网盘文件系统路径*/
-    public static String FILE_PATH = "./file";
+    public static String FILE_PATH = "../../../file";
 
+    /*文件类型*/
     /**文件类型标识-文件夹*/
     public static String FILE_TYPE_FOLDER = "folder";
-
     /**文件类型标识-文件*/
     public static String FILE_TYPE_FILE = "file";
 
@@ -48,6 +48,8 @@ public class PublicValue {
 
     /**已登录用户得到的分享文件*/
     public static HashMap<String,Long> userShareFileMap = new HashMap<>();
+
+
 
     /**
      * 刷新系统配置缓存
