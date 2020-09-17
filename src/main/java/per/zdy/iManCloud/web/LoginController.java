@@ -36,7 +36,7 @@ public class LoginController {
     @Autowired
     FileService fileService;
 
-    @PostMapping("/pages/page/login")
+    @PostMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult){
         //shiro 24小时后失效
         SecurityUtils.getSubject().getSession().setTimeout(24*3600*1000);
@@ -68,11 +68,11 @@ public class LoginController {
             subject.login(usernamePasswordToken);
         } catch (AuthenticationException e) {
             if (null == usernamePasswordToken.getUsername()) {
-                mv.setViewName("/pages/page/login.html");
+                mv.setViewName("/login.html");
                 mv.addObject("action",loginMessageReloginCN);
             }
             else {
-                mv.setViewName("/pages/page/login.html");
+                mv.setViewName("/login.html");
                 mv.addObject("action",loginMessageFailedCN);
             }
             e.getMessage();
@@ -83,20 +83,20 @@ public class LoginController {
             mv.setViewName("/pages/page/500.html");
             return mv;
         }
-        mv.addObject("url","../../");
+        mv.addObject("url","./");
         mv.setViewName("/pages/page/goto.html");
         return mv;
     }
 
-    @GetMapping("/pages/page/login")
+    @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/pages/page/login.html");
+        mv.setViewName("/login.html");
         if (loginService.isNewService()){
             mv.addObject("url","./start");
             mv.setViewName("/pages/page/goto.html");
         }else {
-            mv.setViewName("/pages/page/login.html");
+            mv.setViewName("/login.html");
         }
         return mv;
     }

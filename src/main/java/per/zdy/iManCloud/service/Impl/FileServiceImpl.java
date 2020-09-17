@@ -47,6 +47,8 @@ public class FileServiceImpl implements FileService {
     public List<FilePath> queryUserFilePathFromDbRecord(String userName, String parentPath){
         String[] queryPathStr = parentPath.split("\\./");
 
+        System.out.println(FILE_PATH);
+
         if (queryPathStr.length<=0){
             parentPath = FILE_PATH+"/"+userName+"/";
         }else{

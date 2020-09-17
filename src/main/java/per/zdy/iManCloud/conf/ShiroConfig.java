@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
@@ -52,14 +53,12 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String, String> map = new HashMap<>();
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
         //登出
         map.put("/logout", "logout");
-        //对所有用户认证 其他资源都需要认证  authc 表示需要认证才能进行访问 user表示配置记住我或认证通过可以访问的地址
-        map.put("/**", "user");
+        //其它放行
         map.put("/checkFileCode","anon");
         map.put("/login", "anon");
-        map.put("/pages/page/login", "anon");
         map.put("/start", "anon");
         map.put("/register", "anon");
         map.put("/h2-console/**", "anon");
@@ -72,11 +71,13 @@ public class ShiroConfig {
         map.put("/dist/**", "anon");
         map.put("/script/**", "anon");
         map.put("/themes/**", "anon");
+        //对所有用户认证 其他资源都需要认证  authc 表示需要认证才能进行访问 user表示配置记住我或认证通过可以访问的地址
+        map.put("/**", "user");
 
         //登录
-        shiroFilterFactoryBean.setLoginUrl("/pages/page/login");
+        shiroFilterFactoryBean.setLoginUrl("./login");
         //首页
-        shiroFilterFactoryBean.setSuccessUrl("/");
+        shiroFilterFactoryBean.setSuccessUrl("./");
         //错误页面，认证不通过跳转
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
